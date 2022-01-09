@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
@@ -14,8 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.GameController">
    <children>
       <ImageView fitHeight="619.0" fitWidth="922.0" layoutX="-92.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,12 +26,12 @@
             <GaussianBlur radius="17.81" />
          </effect>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#67acdc" height="450.0" layoutX="129.0" layoutY="77.0" opacity="0.2" stroke="TRANSPARENT" strokeType="INSIDE" width="559.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#67acdc" height="470.0" layoutX="129.0" layoutY="57.0" opacity="0.2" stroke="TRANSPARENT" strokeType="INSIDE" width="559.0">
          <effect>
             <DropShadow />
          </effect>
       </Rectangle>
-      <Line endX="318.29998779296875" endY="1.52587890625E-5" layoutX="291.0" layoutY="145.0" startX="-162.00001525878906" startY="1.52587890625E-5">
+      <Line endX="318.29998779296875" endY="1.52587890625E-5" layoutX="292.0" layoutY="115.0" startX="-162.00001525878906" startY="1.52587890625E-5">
          <stroke>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -50,40 +51,40 @@
       </Line>
       <ImageView fitHeight="196.0" fitWidth="224.0" layoutX="58.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/triangle.png" />
+            <Image url="@../../../../images/hex-white.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="76.0" fitWidth="91.0" layoutX="610.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" rotate="-150.4">
+      <ImageView fx:id="arrows" fitHeight="76.0" fitWidth="91.0" layoutX="611.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" rotate="-150.4">
          <image>
             <Image url="@../../../../images/triangles2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="200.0" layoutX="307.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="q1" fitHeight="30.0" fitWidth="200.0" layoutX="308.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/hex2.png" />
+            <Image url="@../../../../images/wrong.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="200.0" layoutX="347.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="q2" fitHeight="30.0" fitWidth="200.0" layoutX="348.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/not_answered.png" />
+            <Image url="@../../../../images/correct.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="200.0" layoutX="387.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/not_answered.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="200.0" layoutX="427.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="q3" fitHeight="30.0" fitWidth="200.0" layoutX="388.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/not_answered.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="200.0" layoutX="467.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="q4" fitHeight="30.0" fitWidth="200.0" layoutX="428.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/not_answered.png" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="343.0" layoutY="436.0" prefHeight="45.0" prefWidth="114.0" style="-fx-background-color: linear-gradient(#F4A532, #FB4A4F);; -fx-background-radius: 5; -fx-border-radius: 5;" text="DALJE" textFill="WHITE">
+      <ImageView fx:id="q5" fitHeight="30.0" fitWidth="200.0" layoutX="468.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/not_answered.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="nextQuestionBtn" buttonType="RAISED" layoutX="497.0" layoutY="449.0" prefHeight="45.0" prefWidth="114.0" style="-fx-background-color: linear-gradient(#F4A532, #FB4A4F); -fx-background-radius: 0; -fx-border-radius: 5;" text="DALJE" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -91,5 +92,50 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Pane fx:id="questionPane" layoutX="150.0" layoutY="138.0" prefHeight="285.0" prefWidth="515.0">
+         <children>
+            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="69.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 1" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+               </selectedColor>
+               <unSelectedColor>
+                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+               </unSelectedColor>
+            </JFXRadioButton>
+            <Label layoutX="41.0" layoutY="8.0" prefHeight="40.0" prefWidth="422.0" text="Pitanje pitanje " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="121.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 2" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+               </selectedColor>
+               <unSelectedColor>
+                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+               </unSelectedColor>
+            </JFXRadioButton>
+            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="173.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 3" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+               </selectedColor>
+               <unSelectedColor>
+                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+               </unSelectedColor>
+            </JFXRadioButton>
+            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="225.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 4" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+               </selectedColor>
+               <unSelectedColor>
+                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+               </unSelectedColor>
+            </JFXRadioButton>
+         </children></Pane>
+      <ImageView fx:id="hex" fitHeight="196.0" fitWidth="224.0" layoutX="42.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" rotate="117.3">
+         <image>
+            <Image url="@../../../../images/hex.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

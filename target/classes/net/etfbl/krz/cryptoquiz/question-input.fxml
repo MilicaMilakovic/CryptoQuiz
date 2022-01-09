@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="120.0" layoutY="61.0" prefHeight="46.0" prefWidth="275.0" text="pitanjeeee" textAlignment="CENTER" />
+      <TextField layoutX="150.0" layoutY="168.0" prefHeight="38.0" prefWidth="216.0" />
+   </children>
+</Pane>

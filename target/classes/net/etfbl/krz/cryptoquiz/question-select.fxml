@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="515.0" style="-fx-background-color: #2D007E;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXRadioButton graphicTextGap="10.0" layoutX="50.0" layoutY="79.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 1" textFill="WHITE">
+         <selectedColor>
+            <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+         </selectedColor>
+         <unSelectedColor>
+            <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+         </unSelectedColor>
+      </JFXRadioButton>
+      <Label layoutX="51.0" layoutY="18.0" prefHeight="40.0" prefWidth="422.0" text="Pitanje pitanje " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXRadioButton graphicTextGap="10.0" layoutX="50.0" layoutY="131.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 2" textFill="WHITE">
+         <selectedColor>
+            <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+         </selectedColor>
+         <unSelectedColor>
+            <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+         </unSelectedColor>
+      </JFXRadioButton>
+      <JFXRadioButton graphicTextGap="10.0" layoutX="50.0" layoutY="183.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 3" textFill="WHITE">
+         <selectedColor>
+            <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+         </selectedColor>
+         <unSelectedColor>
+            <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+         </unSelectedColor>
+      </JFXRadioButton>
+      <JFXRadioButton graphicTextGap="10.0" layoutX="50.0" layoutY="235.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 4" textFill="WHITE">
+         <selectedColor>
+            <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+         </selectedColor>
+         <unSelectedColor>
+            <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
+         </unSelectedColor>
+      </JFXRadioButton>
+   </children>
+</Pane>
