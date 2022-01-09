@@ -6,6 +6,6 @@ module com.example.cryptoquiz {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.example.cryptoquiz to javafx.fxml;
-    exports com.example.cryptoquiz;
+    opens net.etfbl.krz.cryptoquiz to javafx.fxml;
+    exports net.etfbl.krz.cryptoquiz;
 }

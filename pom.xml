@@ -58,6 +58,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -80,7 +85,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.cryptoquiz/com.example.cryptoquiz.HelloApplication</mainClass>
+                            <mainClass>com.example.cryptoquiz/net.etfbl.krz.cryptoquiz.HelloApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>

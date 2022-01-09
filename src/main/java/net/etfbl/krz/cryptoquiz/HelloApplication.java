@@ -1,4 +1,4 @@
-package com.example.cryptoquiz;
+package net.etfbl.krz.cryptoquiz;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,4 @@
-package com.example.cryptoquiz;
+package net.etfbl.krz.cryptoquiz;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
