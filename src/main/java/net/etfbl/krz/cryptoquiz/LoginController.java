@@ -39,6 +39,22 @@ public class LoginController implements Initializable {
 
     }
 
+    public void addQuestion(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-question.fxml"));
+        try{
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+            stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+
+            Stage thisStage = (Stage) loginBtn.getScene().getWindow();
+            thisStage.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         triangle.setImage(new Image((new File(Main.resources+ File.separator+"triangle.png")).toURI().toString()));

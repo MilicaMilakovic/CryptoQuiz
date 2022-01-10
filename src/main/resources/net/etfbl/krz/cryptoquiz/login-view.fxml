@@ -56,5 +56,9 @@
             <Image url="@../../../../images/wrong.png" />
          </image>
       </ImageView>
+      <JFXButton layoutX="478.0" layoutY="361.0" onAction="#addQuestion" text="Dodaj pitanje">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
    </children>
 </Pane>

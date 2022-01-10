@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.AddQuestionController">
+   <children>
+      <ImageView fitHeight="656.0" fitWidth="942.0" layoutX="-110.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/bg.jpg" />
+         </image>
+         <effect>
+            <GaussianBlur radius="17.81" />
+         </effect>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#67acdc" height="500.0" layoutX="116.0" layoutY="51.0" opacity="0.2" stroke="TRANSPARENT" strokeType="INSIDE" width="559.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Rectangle>
+      <Line endX="359.7900390625" endY="1.52587890625E-5" layoutX="278.0" layoutY="234.0" startX="-162.00001525878906" startY="1.52587890625E-5">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9843137264251709" green="0.29019609093666077" blue="0.30980393290519714" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <ImageView fx:id="arrows" fitHeight="76.0" fitWidth="91.0" layoutX="106.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" rotate="-149.9">
+         <image>
+            <Image url="@../../../../images/triangles2.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="nextQuestionBtn" buttonType="RAISED" layoutX="152.0" layoutY="477.0" prefHeight="45.0" prefWidth="114.0" style="-fx-background-color: linear-gradient(#F4A532, #FB4A4F); -fx-background-radius: 0; -fx-border-radius: 5;" text="DODAJ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fx:id="hex" fitHeight="196.0" fitWidth="224.0" layoutX="576.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/circle.png" />
+         </image>
+      </ImageView>
+      <JFXRadioButton fx:id="inputBtn" layoutX="377.0" layoutY="256.0" text="Unos" textFill="WHITE">
+         <unSelectedColor>
+            <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+         </unSelectedColor>
+         <selectedColor>
+            <Color red="0.30980393290519714" green="0.6078431606292725" blue="0.929411768913269" />
+         </selectedColor>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="selectBtn" layoutX="473.0" layoutY="256.0" text="Odabir" textFill="WHITE">
+         <unSelectedColor>
+            <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+         </unSelectedColor>
+         <selectedColor>
+            <Color red="0.30980393290519714" green="0.6078431606292725" blue="0.929411768913269" />
+         </selectedColor>
+      </JFXRadioButton>
+      <JFXButton buttonType="RAISED" layoutX="152.0" layoutY="182.0" onAction="#selectPhoto" prefHeight="32.0" prefWidth="114.0" style="-fx-background-radius: 0; -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 2; -fx-border-radius: 5;" text="Odaberi sliku" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="166.0" layoutX="376.0" layoutY="60.0" strokeType="INSIDE" width="249.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9843137264251709" green="0.29019609093666077" blue="0.30980393290519714" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Rectangle>
+      <ImageView fx:id="img" fitHeight="164.0" fitWidth="242.0" layoutX="380.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="152.0" layoutY="254.0" text="Tip pitanja:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="option2" layoutX="515.0" layoutY="301.0" prefHeight="26.0" prefWidth="122.0" />
+      <TextField fx:id="option1" layoutX="380.0" layoutY="301.0" prefHeight="26.0" prefWidth="122.0" />
+      <TextField fx:id="option4" layoutX="515.0" layoutY="339.0" prefHeight="26.0" prefWidth="122.0" />
+      <TextField fx:id="option3" layoutX="380.0" layoutY="339.0" prefHeight="26.0" prefWidth="122.0" />
+      <Line endX="359.7900390625" endY="1.52587890625E-5" layoutX="278.0" layoutY="291.0" startX="-162.00001525878906" startY="1.52587890625E-5">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.1764705926179886" blue="0.49803921580314636" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3843137323856354" green="0.5647059082984924" blue="0.8588235378265381" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <Label layoutX="152.0" layoutY="316.0" text="Ponudjeni odgovori:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Line endX="359.7900390625" endY="1.52587890625E-5" layoutX="277.0" layoutY="384.0" startX="-162.00001525878906" startY="1.52587890625E-5">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.1764705926179886" blue="0.49803921580314636" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3843137323856354" green="0.5647059082984924" blue="0.8588235378265381" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <Label layoutX="152.0" layoutY="409.0" text="Tacan odgovor:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="380.0" layoutY="404.0" prefHeight="32.0" prefWidth="216.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 2; -fx-text-fill: white;" />
+   </children>
+</AnchorPane>
