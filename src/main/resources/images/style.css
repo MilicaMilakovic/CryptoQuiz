@@ -1,0 +1,7 @@
+.jfx-radio-button {
+    -fx-border-color: #ebebeb;
+    padding: 10px;
+}
+.radio-button:selected .radio{
+    -fx-border-color: #f4a532;    
+}

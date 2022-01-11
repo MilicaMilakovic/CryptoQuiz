@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="net.etfbl.krz.cryptoquiz.GameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.GameController">
    <children>
       <ImageView fitHeight="619.0" fitWidth="922.0" layoutX="-92.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -94,7 +94,7 @@
       </JFXButton>
       <Pane fx:id="questionPane" layoutX="150.0" layoutY="138.0" prefHeight="285.0" prefWidth="515.0">
          <children>
-            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="69.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 1" textFill="WHITE">
+            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="69.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" stylesheets="@../../../../images/style.css" text="Odgovor 1" textFill="WHITE">
                <selectedColor>
                   <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
                </selectedColor>

@@ -14,6 +14,8 @@ import net.etfbl.krz.model.Question;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ import java.util.ResourceBundle;
 import com.google.gson.Gson;
 
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 public class AddQuestionController implements Initializable {
 
@@ -108,17 +112,37 @@ public class AddQuestionController implements Initializable {
             question.setOptions(options);
         }
 
-
         Gson gson = new Gson();
         String q = gson.toJson(question);
         System.out.println(q);
 
+        // AES Encryption of the question
+
         Security.setProperty("crypto.policy", "unlimited");
-        try {
-            int maxKeySize = Cipher.getMaxAllowedKeyLength("AES");
-            System.out.println("Max Key Size for AES is : " + maxKeySize);
-        } catch (NoSuchAlgorithmException e) {
+
+        try{
+            Cipher cipher = Cipher.getInstance("AES");
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+            SecretKey key = keyGenerator.generateKey();
+
+            System.out.println("Keylen: " +Main.stegoKey.getEncoded().length);
+            System.out.println("========");
+            byte[] output = null;
+            cipher.init(Cipher.ENCRYPT_MODE, Main.stegoKey);
+            output = cipher.doFinal(q.getBytes(StandardCharsets.UTF_8));
+            System.out.println("Sifrat: " );
+            System.out.println(new String(output));
+
+
+            System.out.println("=========");
+            byte[] decrypt = null;
+            cipher.init(Cipher.DECRYPT_MODE, Main.stegoKey);
+            decrypt = cipher.doFinal(output);
+            System.out.println("Plaintext: " + new String(decrypt));
+
+        } catch (Exception e){
             e.printStackTrace();
         }
+
     }
 }
