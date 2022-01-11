@@ -35,6 +35,10 @@ public class GameController implements Initializable {
     public ImageView arrows;
 
     ArrayList<Question> questions = new ArrayList<>();
+    Question question;
+
+    public static String answer="";
+    String correctAnswer="";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,9 +59,9 @@ public class GameController implements Initializable {
             System.out.println(q);
 
         // Load First Question
-        Question question = questions.remove(0);
-        if (question.getType().equals("input")) loadInputQuestion(question);
-        else loadSelectQuestion(question);
+        question = questions.remove(0);
+        if (question.getType().equals("input")) loadInputQuestion();
+        else loadSelectQuestion();
 
     }
 
@@ -111,7 +115,7 @@ public class GameController implements Initializable {
         return gson.fromJson(questionJSON,Question.class);
     }
 
-    public void loadInputQuestion(Question question){
+    public void loadInputQuestion(){
         Parent root = null;
         InputQuestionController.question = question;
         try{
@@ -123,7 +127,7 @@ public class GameController implements Initializable {
         }
     }
 
-    public void loadSelectQuestion(Question question){
+    public void loadSelectQuestion(){
         Parent root = null;
         SelectQuestionController.question = question;
         try{
@@ -133,5 +137,15 @@ public class GameController implements Initializable {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void nextQuestion(){
+        System.out.println("answer :" + answer);
+        if(questions.size()>0) {
+            question = questions.remove(0);
+            if (question.getType().equals("input")) loadInputQuestion();
+            else loadSelectQuestion();
+        } else
+            System.out.println("Kraj");
     }
 }

@@ -1,9 +1,12 @@
 package net.etfbl.krz.cryptoquiz;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import net.etfbl.krz.model.Question;
 
@@ -38,11 +41,18 @@ public class SelectQuestionController implements Initializable {
         questionLabel.setText(question.getQuestion());
 
         ArrayList<String> options = question.getOptions();
-        
+
         option1.setText(options.get(0));
         option2.setText(options.get(1));
         option3.setText(options.get(2));
         option4.setText(options.get(3));
+
+        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
+                GameController.answer = ((RadioButton)t1.getToggleGroup().getSelectedToggle()).getText();
+            }
+        });
 
     }
 }

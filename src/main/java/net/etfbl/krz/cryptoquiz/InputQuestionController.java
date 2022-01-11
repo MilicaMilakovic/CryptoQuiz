@@ -23,4 +23,8 @@ public class InputQuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         questionLabel.setText(question.getQuestion());
     }
+
+    public void submitAnswer(){
+        GameController.answer = answerField.getText();
+    }
 }
