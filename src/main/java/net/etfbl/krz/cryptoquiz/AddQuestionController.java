@@ -19,8 +19,11 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import com.google.gson.Gson;
+import net.etfbl.krz.steganography.Steganography;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -94,7 +97,7 @@ public class AddQuestionController implements Initializable {
         }
     }
 
-    public void addQuestion(){
+    public void addQuestion() throws Exception{
         Question question = new Question();
 
         question.setQuestion(questionField.getText());
@@ -116,33 +119,51 @@ public class AddQuestionController implements Initializable {
         String q = gson.toJson(question);
         System.out.println(q);
 
+        System.out.println("========");
+
         // AES Encryption of the question
+        // Pitanje se kriptuje AES algoritmom, zatim se vrsi base64 enkodovanje
+        // i ubacuje se u sliku
 
         Security.setProperty("crypto.policy", "unlimited");
+        System.out.println("Kljuc:");
+        System.out.println(new String(Main.stegoKey.getEncoded()));
 
-        try{
-            Cipher cipher = Cipher.getInstance("AES");
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            SecretKey key = keyGenerator.generateKey();
+        Cipher cipher = Cipher.getInstance("AES");
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
 
-            System.out.println("Keylen: " +Main.stegoKey.getEncoded().length);
-            System.out.println("========");
-            byte[] output = null;
-            cipher.init(Cipher.ENCRYPT_MODE, Main.stegoKey);
-            output = cipher.doFinal(q.getBytes(StandardCharsets.UTF_8));
-            System.out.println("Sifrat: " );
-            System.out.println(new String(output));
+        System.out.println("Keylen: " +Main.stegoKey.getEncoded().length);
+        System.out.println("========");
+        byte[] output = null;
+        cipher.init(Cipher.ENCRYPT_MODE, Main.stegoKey);
+        output = cipher.doFinal(q.getBytes(StandardCharsets.UTF_8));
+        System.out.println("Sifrat: " );
+        String out = Base64.getEncoder().encodeToString(output);
+        System.out.println(out);
 
+        File stegoFile = createStegoFile();
+        Steganography.encode(selectedPhoto,out,stegoFile);
 
-            System.out.println("=========");
-            byte[] decrypt = null;
-            cipher.init(Cipher.DECRYPT_MODE, Main.stegoKey);
-            decrypt = cipher.doFinal(output);
-            System.out.println("Plaintext: " + new String(decrypt));
+        System.out.println("Encoded..." );
 
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        String decoded = Steganography.decode(stegoFile);
+        System.out.println("Decoded:");
+        System.out.println(decoded);
 
+       System.out.println("=========");
+       byte[] decrypt = null;
+       cipher.init(Cipher.DECRYPT_MODE, Main.stegoKey);
+       decrypt = cipher.doFinal(Base64.getDecoder().decode(decoded.getBytes(StandardCharsets.UTF_8)));
+       System.out.println("Plaintext: ");
+       System.out.println(new String(decrypt));
+
+    }
+
+    private File createStegoFile(){
+        File stegoFile;
+        String path = questionType.equals("input") ? Main.questionsDir+File.separator+"input" : Main.questionsDir+File.separator+"select";
+        int n = Objects.requireNonNull(new File(path).listFiles()).length;
+        stegoFile = new File(path+File.separator+"question"+(n+1)+".bmp");
+        return stegoFile;
     }
 }

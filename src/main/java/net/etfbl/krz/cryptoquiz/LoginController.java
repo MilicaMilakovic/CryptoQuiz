@@ -36,7 +36,6 @@ public class LoginController implements Initializable {
         } catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     public void addQuestion(){
@@ -44,7 +43,7 @@ public class LoginController implements Initializable {
         try{
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-            stage.setTitle("Login");
+            stage.setTitle("Add Question");
             stage.setScene(scene);
             stage.show();
 

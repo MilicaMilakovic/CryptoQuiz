@@ -14,8 +14,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class Main extends Application {
-    public  static File file = new File("src/main/resources/images");
-    public  static String resources = file.getAbsolutePath();
+    public static final File file = new File("src/main/resources/images");
+    public static final String resources = file.getAbsolutePath();
+
+    public static final  String questionsDir = (new File("src/main/resources/questions")).getAbsolutePath();
 
     public static final SecretKeySpec stegoKey;
 
@@ -34,8 +36,6 @@ public class Main extends Application {
         key = Arrays.copyOf(key, 16); // uzima se 16 bajtova jer je to potrebna duzina kljuca za aes
 
         stegoKey =new SecretKeySpec(key,"AES");
-        System.out.println("Kljuc:");
-        System.out.println(new String(stegoKey.getEncoded()));
     }
 
     @Override

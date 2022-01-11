@@ -27,6 +27,7 @@ public class GameController implements Initializable {
 
     public ImageView hex;
     public ImageView arrows;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File file = new File(Main.resources+ File.separator+"not_answered.png");
@@ -38,5 +39,18 @@ public class GameController implements Initializable {
 
         hex.setImage(new Image((new File(Main.resources+ File.separator+"hex.png")).toURI().toString()));
         arrows.setImage(new Image((new File(Main.resources+ File.separator+"triangles2.png")).toURI().toString()));
+    }
+
+    public void loadQuestion(){
+
+
+    }
+
+    public void loadInsertQuestion(){
+
+    }
+
+    public void loadSelectQuestion(){
+
     }
 }

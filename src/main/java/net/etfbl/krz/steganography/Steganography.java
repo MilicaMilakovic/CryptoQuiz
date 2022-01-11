@@ -9,11 +9,11 @@ import java.nio.file.StandardCopyOption;
 
 public class Steganography {
 
-    public static void encode(File carrier, String payload) {
+    public static void encode(File carrier, String payload, File stegoFile) {
         int pos = locatePixelArray(carrier);
         int readByte = 0;
-        File stegoFile = new File(
-                carrier.getAbsolutePath().substring(0, carrier.getAbsolutePath().length() - 4) + "_stego.bmp");
+//        File stegoFile = new File(
+//                carrier.getAbsolutePath().substring(0, carrier.getAbsolutePath().length() - 4) + "_stego.bmp");
         try {
             Files.copy(carrier.toPath(), stegoFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e1) {
