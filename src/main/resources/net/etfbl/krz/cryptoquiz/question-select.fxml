@@ -6,7 +6,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="515.0" style="-fx-background-color: trnansparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.SelectQuestionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="292.0" prefWidth="515.0" style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="net.etfbl.krz.cryptoquiz.SelectQuestionController">
    <children>
       <JFXRadioButton fx:id="option1" graphicTextGap="10.0" layoutX="50.0" layoutY="79.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 1" textFill="WHITE">
          <selectedColor>
@@ -18,7 +20,7 @@
       </JFXRadioButton>
       <Label fx:id="questionLabel" layoutX="51.0" layoutY="4.0" prefHeight="68.0" prefWidth="422.0" text="Pitanje pitanje " textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <JFXRadioButton fx:id="option2" graphicTextGap="10.0" layoutX="50.0" layoutY="131.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 2" textFill="WHITE">

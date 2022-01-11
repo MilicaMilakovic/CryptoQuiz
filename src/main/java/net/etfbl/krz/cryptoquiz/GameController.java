@@ -60,6 +60,7 @@ public class GameController implements Initializable {
 
         // Load First Question
         question = questions.remove(0);
+        correctAnswer = question.getCorrectAnswer();
         if (question.getType().equals("input")) loadInputQuestion();
         else loadSelectQuestion();
 
@@ -141,11 +142,24 @@ public class GameController implements Initializable {
 
     public void nextQuestion(){
         System.out.println("answer :" + answer);
+        setImage();
         if(questions.size()>0) {
             question = questions.remove(0);
+            correctAnswer = question.getCorrectAnswer();
+
             if (question.getType().equals("input")) loadInputQuestion();
             else loadSelectQuestion();
         } else
             System.out.println("Kraj");
+    }
+
+    private void setImage(){
+        ImageView[] images = {q1,q2,q3,q4,q5};
+        int i = 5-questions.size()-1;
+        if(correctAnswer.equals(answer.trim())){
+            images[i].setImage(new Image((new File(Main.resources+ File.separator+"correct.png").toURI().toString())));
+        } else {
+            images[i].setImage(new Image((new File(Main.resources+ File.separator+"wrong.png").toURI().toString())));
+        }
     }
 }
