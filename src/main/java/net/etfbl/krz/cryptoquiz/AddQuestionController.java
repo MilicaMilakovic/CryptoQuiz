@@ -53,7 +53,6 @@ public class AddQuestionController implements Initializable {
     @FXML
     TextField correctAnswerField;
 
-
     String questionType="";
     File selectedPhoto;
 
@@ -89,7 +88,8 @@ public class AddQuestionController implements Initializable {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Photo");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG Files","*.jpg"));
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg","*.png"));
         selectedPhoto = fileChooser.showOpenDialog(stage);
 
         if(selectedPhoto != null){
@@ -122,7 +122,8 @@ public class AddQuestionController implements Initializable {
         System.out.println("========");
 
         // AES Encryption of the question
-        // Pitanje se kriptuje AES algoritmom, zatim se vrsi base64 enkodovanje
+
+        // Pitanje (u JSON formatu) se kriptuje AES algoritmom, zatim se vrsi base64 enkodovanje
         // i ubacuje se u sliku
 
         Security.setProperty("crypto.policy", "unlimited");

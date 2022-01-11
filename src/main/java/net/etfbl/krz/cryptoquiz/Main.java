@@ -22,8 +22,7 @@ public class Main extends Application {
     public static final SecretKeySpec stegoKey;
 
     static {
-
-        // Kljuc za dekriptovanje pitanja sakrivenog u slici je otisak lozinke SIGURNOST
+        // Kljuc za dekripciju pitanja sakrivenog u slici je otisak lozinke SIGURNOST
 
         byte[] key = "SIGURNOST".getBytes(StandardCharsets.UTF_8);
         MessageDigest sha = null;
@@ -33,7 +32,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
         key = sha.digest(key);
-        key = Arrays.copyOf(key, 16); // uzima se 16 bajtova jer je to potrebna duzina kljuca za aes
+        key = Arrays.copyOf(key, 16); // uzima se 16 bajtova jer je to potrebna duzina kljuca za AES
 
         stegoKey =new SecretKeySpec(key,"AES");
     }
