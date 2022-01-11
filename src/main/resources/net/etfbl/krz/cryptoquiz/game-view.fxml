@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
@@ -92,46 +90,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Pane fx:id="questionPane" layoutX="150.0" layoutY="138.0" prefHeight="285.0" prefWidth="515.0">
-         <children>
-            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="69.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" stylesheets="@../../../../images/style.css" text="Odgovor 1" textFill="WHITE">
-               <selectedColor>
-                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
-               </selectedColor>
-               <unSelectedColor>
-                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
-               </unSelectedColor>
-            </JFXRadioButton>
-            <Label layoutX="41.0" layoutY="8.0" prefHeight="40.0" prefWidth="422.0" text="Pitanje pitanje " textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="121.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 2" textFill="WHITE">
-               <selectedColor>
-                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
-               </selectedColor>
-               <unSelectedColor>
-                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
-               </unSelectedColor>
-            </JFXRadioButton>
-            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="173.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 3" textFill="WHITE">
-               <selectedColor>
-                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
-               </selectedColor>
-               <unSelectedColor>
-                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
-               </unSelectedColor>
-            </JFXRadioButton>
-            <JFXRadioButton graphicTextGap="10.0" layoutX="40.0" layoutY="225.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 4" textFill="WHITE">
-               <selectedColor>
-                  <Color red="0.95686274766922" green="0.6470588445663452" blue="0.19607843458652496" />
-               </selectedColor>
-               <unSelectedColor>
-                  <Color red="0.9215686321258545" green="0.9215686321258545" blue="0.9215686321258545" />
-               </unSelectedColor>
-            </JFXRadioButton>
-         </children></Pane>
+      <Pane fx:id="questionPane" layoutX="150.0" layoutY="138.0" prefHeight="285.0" prefWidth="515.0" />
       <ImageView fx:id="hex" fitHeight="196.0" fitWidth="224.0" layoutX="42.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true" rotate="117.3">
          <image>
             <Image url="@../../../../images/hex.png" />

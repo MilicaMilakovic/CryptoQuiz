@@ -3,6 +3,7 @@ package net.etfbl.krz.model;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Question implements Serializable {
 
@@ -11,18 +12,14 @@ public class Question implements Serializable {
     private String type;
     private ArrayList<String> options;
 
-    private File file;
-
-
     public Question() {
     }
 
-    public Question(String question, String correctAnswer, String type, ArrayList<String> options, File file) {
+    public Question(String question, String correctAnswer, String type, ArrayList<String> options) {
         this.question = question;
         this.correctAnswer = correctAnswer;
         this.type = type;
         this.options = options;
-        this.file = file;
     }
 
     public String getQuestion() {
@@ -57,11 +54,26 @@ public class Question implements Serializable {
         this.options = options;
     }
 
-    public File getFile() {
-        return file;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question1 = (Question) o;
+        return Objects.equals(question, question1.question) && Objects.equals(correctAnswer, question1.correctAnswer) && Objects.equals(type, question1.type) && Objects.equals(options, question1.options);
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    @Override
+    public int hashCode() {
+        return Objects.hash(question, correctAnswer, type, options);
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", type='" + type + '\'' +
+                ", options=" + options +
+                '}';
     }
 }

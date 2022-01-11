@@ -147,17 +147,6 @@ public class AddQuestionController implements Initializable {
 
         System.out.println("Encoded..." );
 
-        String decoded = Steganography.decode(stegoFile);
-        System.out.println("Decoded:");
-        System.out.println(decoded);
-
-       System.out.println("=========");
-       byte[] decrypt = null;
-       cipher.init(Cipher.DECRYPT_MODE, Main.stegoKey);
-       decrypt = cipher.doFinal(Base64.getDecoder().decode(decoded.getBytes(StandardCharsets.UTF_8)));
-       System.out.println("Plaintext: ");
-       System.out.println(new String(decrypt));
-
     }
 
     private File createStegoFile(){

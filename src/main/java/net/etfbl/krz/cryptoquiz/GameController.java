@@ -1,16 +1,22 @@
 package net.etfbl.krz.cryptoquiz;
 
+import com.google.gson.Gson;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import net.etfbl.krz.model.Question;
+import net.etfbl.krz.steganography.Steganography;
 
+import javax.crypto.Cipher;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 public class GameController implements Initializable {
     @FXML
@@ -28,6 +34,8 @@ public class GameController implements Initializable {
     public ImageView hex;
     public ImageView arrows;
 
+    ArrayList<Question> questions = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File file = new File(Main.resources+ File.separator+"not_answered.png");
@@ -39,18 +47,91 @@ public class GameController implements Initializable {
 
         hex.setImage(new Image((new File(Main.resources+ File.separator+"hex.png")).toURI().toString()));
         arrows.setImage(new Image((new File(Main.resources+ File.separator+"triangles2.png")).toURI().toString()));
+
+        loadQuestion();
+
+        Collections.shuffle(questions);
+        for(Question q : questions)
+            System.out.println(q);
+
+        // Load First Question
+        Question question = questions.remove(0);
+        if (question.getType().equals("input")) loadInputQuestion(question);
+        else loadSelectQuestion(question);
+
     }
+
 
     public void loadQuestion(){
 
+        File inputQuestionsDir = new File(Main.questionsDir+ File.separator+"input");
+        File selectQuestionsDir = new File(Main.questionsDir+File.separator+"select");
 
+        File[] inputFiles = inputQuestionsDir.listFiles();
+        File[] selectFiles = selectQuestionsDir.listFiles();
+
+        int i = new Random().nextInt(2)+2;
+        int s = 5 - i;
+
+        assert inputFiles != null;
+        addToArrays(i,questions,inputFiles.length,inputFiles);
+
+        assert selectFiles != null;
+        addToArrays(s,questions,selectFiles.length,selectFiles);
+
+        System.out.println("Questions selected!!");
     }
 
-    public void loadInsertQuestion(){
+    private void addToArrays(int n, ArrayList<Question> questions, int count, File[] files){
 
+        for(int i=0; i<n; i++){
+            try{
+                Question q = decodeQuestion(files[new Random().nextInt(count)]);
+                if(!questions.contains(q))
+                    questions.add(q);
+                else --i;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
-    public void loadSelectQuestion(){
+    private Question decodeQuestion(File stegoFile) throws Exception{
 
+       Cipher cipher = Cipher.getInstance("AES");
+       String decoded = Steganography.decode(stegoFile);
+
+       byte[] decrypt = null;
+       cipher.init(Cipher.DECRYPT_MODE, Main.stegoKey);
+       decrypt = cipher.doFinal(Base64.getDecoder().decode(decoded.getBytes(StandardCharsets.UTF_8)));
+
+       String questionJSON = new String(decrypt);
+       Gson gson = new Gson();
+
+        return gson.fromJson(questionJSON,Question.class);
+    }
+
+    public void loadInputQuestion(Question question){
+        Parent root = null;
+        InputQuestionController.question = question;
+        try{
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("question-input.fxml")));
+            questionPane.getChildren().removeAll();
+            questionPane.getChildren().setAll(root);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void loadSelectQuestion(Question question){
+        Parent root = null;
+        SelectQuestionController.question = question;
+        try{
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("question-select.fxml")));
+            questionPane.getChildren().removeAll();
+            questionPane.getChildren().setAll(root);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
