@@ -1,11 +1,13 @@
 package net.etfbl.krz.cryptoquiz;
 
 import com.google.gson.Gson;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -16,6 +18,7 @@ import javax.crypto.Cipher;
 import java.io.File;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class GameController implements Initializable {
@@ -25,6 +28,8 @@ public class GameController implements Initializable {
     public Button nextQuestionBtn;
     @FXML
     public Button resultsButton;
+    @FXML
+    public Label timer;
 
     @FXML
     public ImageView q1;
@@ -39,7 +44,9 @@ public class GameController implements Initializable {
     ArrayList<Question> questions = new ArrayList<>();
     Question question;
 
+    private final long start = System.currentTimeMillis();
     public static String answer="";
+    private boolean gameEnd = false;
     String correctAnswer="";
     int correctAnswers = 0;
 
@@ -61,8 +68,6 @@ public class GameController implements Initializable {
         loadQuestion();
 
         Collections.shuffle(questions);
-//        for(Question q : questions)
-//            System.out.println(q);
 
         // Load First Question
         question = questions.remove(0);
@@ -70,6 +75,18 @@ public class GameController implements Initializable {
         if (question.getType().equals("input")) loadInputQuestion();
         else loadSelectQuestion();
 
+        new Thread(() -> {
+            while(!gameEnd) {
+                long end = System.currentTimeMillis();
+                Platform.runLater(()->
+                timer.setText((new SimpleDateFormat("mm:ss").format(new Date(end - start)))));
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 
@@ -181,6 +198,7 @@ public class GameController implements Initializable {
         EndGameController.score = correctAnswers;
         nextQuestionBtn.setVisible(false);
         resultsButton.setVisible(true);
+        gameEnd = true;
         try{
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("end-game.fxml")));
             questionPane.getChildren().removeAll();
