@@ -39,6 +39,7 @@ public class GameController implements Initializable {
 
     public static String answer="";
     String correctAnswer="";
+    int correctAnswers = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,8 +56,8 @@ public class GameController implements Initializable {
         loadQuestion();
 
         Collections.shuffle(questions);
-        for(Question q : questions)
-            System.out.println(q);
+//        for(Question q : questions)
+//            System.out.println(q);
 
         // Load First Question
         question = questions.remove(0);
@@ -85,13 +86,15 @@ public class GameController implements Initializable {
         addToArrays(s,questions,selectFiles.length,selectFiles);
 
         System.out.println("Questions selected!!");
+
     }
 
     private void addToArrays(int n, ArrayList<Question> questions, int count, File[] files){
 
         for(int i=0; i<n; i++){
             try{
-                Question q = decodeQuestion(files[new Random().nextInt(count)]);
+                int m = new Random().nextInt(count);
+                Question q = decodeQuestion(files[m]);
                 if(!questions.contains(q))
                     questions.add(q);
                 else --i;
@@ -138,6 +141,7 @@ public class GameController implements Initializable {
         int i = 5-questions.size()-1;
         if(correctAnswer.equals(answer.trim())){
             images[i].setImage(new Image((new File(Main.resources+ File.separator+"correct.png").toURI().toString())));
+            ++correctAnswers;
         } else {
             images[i].setImage(new Image((new File(Main.resources+ File.separator+"wrong.png").toURI().toString())));
         }
@@ -170,6 +174,7 @@ public class GameController implements Initializable {
     public void loadFinishScreen(){
         Parent root = null;
         SelectQuestionController.question = question;
+        EndGameController.score = correctAnswers;
         try{
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("end-game.fxml")));
             questionPane.getChildren().removeAll();
