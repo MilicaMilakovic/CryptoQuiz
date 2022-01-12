@@ -116,6 +116,33 @@ public class GameController implements Initializable {
         return gson.fromJson(questionJSON,Question.class);
     }
 
+
+    public void nextQuestion(){
+        System.out.println("answer :" + answer);
+        setImage();
+        if(questions.size()>0) {
+            question = questions.remove(0);
+            correctAnswer = question.getCorrectAnswer();
+
+            if (question.getType().equals("input")) loadInputQuestion();
+            else loadSelectQuestion();
+        } else {
+            System.out.println("Kraj");
+            loadFinishScreen();
+        }
+    }
+
+
+    private void setImage(){
+        ImageView[] images = {q1,q2,q3,q4,q5};
+        int i = 5-questions.size()-1;
+        if(correctAnswer.equals(answer.trim())){
+            images[i].setImage(new Image((new File(Main.resources+ File.separator+"correct.png").toURI().toString())));
+        } else {
+            images[i].setImage(new Image((new File(Main.resources+ File.separator+"wrong.png").toURI().toString())));
+        }
+    }
+
     public void loadInputQuestion(){
         Parent root = null;
         InputQuestionController.question = question;
@@ -140,26 +167,15 @@ public class GameController implements Initializable {
         }
     }
 
-    public void nextQuestion(){
-        System.out.println("answer :" + answer);
-        setImage();
-        if(questions.size()>0) {
-            question = questions.remove(0);
-            correctAnswer = question.getCorrectAnswer();
-
-            if (question.getType().equals("input")) loadInputQuestion();
-            else loadSelectQuestion();
-        } else
-            System.out.println("Kraj");
-    }
-
-    private void setImage(){
-        ImageView[] images = {q1,q2,q3,q4,q5};
-        int i = 5-questions.size()-1;
-        if(correctAnswer.equals(answer.trim())){
-            images[i].setImage(new Image((new File(Main.resources+ File.separator+"correct.png").toURI().toString())));
-        } else {
-            images[i].setImage(new Image((new File(Main.resources+ File.separator+"wrong.png").toURI().toString())));
+    public void loadFinishScreen(){
+        Parent root = null;
+        SelectQuestionController.question = question;
+        try{
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("end-game.fxml")));
+            questionPane.getChildren().removeAll();
+            questionPane.getChildren().setAll(root);
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
