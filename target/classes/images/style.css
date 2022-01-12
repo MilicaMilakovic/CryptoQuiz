@@ -5,3 +5,27 @@
 .radio-button:selected .radio{
     -fx-border-color: #f4a532;    
 }
+
+.text-area {
+    -fx-background-color:  rgba(101, 122, 191, 0.1);
+    -fx-border-color:  linear-gradient(#F4A532, #FB4A4F);
+    -fx-border-radius: 0;
+    -fx-text-fill: white;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color:  rgba(101, 122, 191, 0.2);
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color:  rgba(101, 122, 191, 0.2);
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color:  rgba(101, 122, 191, 0.2);
+}
+.text-area:focused .content{
+    -fx-font-weight: normal;
+}

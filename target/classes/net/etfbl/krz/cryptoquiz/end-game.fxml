@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="515.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.EndGameController">
    <children>
-      <ImageView fitHeight="310.0" fitWidth="292.0" layoutX="112.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="319.0" fitWidth="324.0" layoutX="98.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/Winners.gif" />
          </image>

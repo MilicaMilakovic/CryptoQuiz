@@ -23,6 +23,8 @@ public class GameController implements Initializable {
     public Pane questionPane;
     @FXML
     public Button nextQuestionBtn;
+    @FXML
+    public Button resultsButton;
 
     @FXML
     public ImageView q1;
@@ -43,6 +45,9 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        nextQuestionBtn.setVisible(true);
+        resultsButton.setVisible(false);
+
         File file = new File(Main.resources+ File.separator+"not_answered.png");
         q1.setImage(new Image(file.toURI().toString()));
         q2.setImage(new Image(file.toURI().toString()));
@@ -121,7 +126,7 @@ public class GameController implements Initializable {
 
 
     public void nextQuestion(){
-        System.out.println("answer :" + answer);
+//        System.out.println("answer :" + answer);
         setImage();
         if(questions.size()>0) {
             question = questions.remove(0);
@@ -173,8 +178,9 @@ public class GameController implements Initializable {
 
     public void loadFinishScreen(){
         Parent root = null;
-        SelectQuestionController.question = question;
         EndGameController.score = correctAnswers;
+        nextQuestionBtn.setVisible(false);
+        resultsButton.setVisible(true);
         try{
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("end-game.fxml")));
             questionPane.getChildren().removeAll();

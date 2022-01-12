@@ -11,6 +11,6 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>
-      <TextField fx:id="answerField" layoutX="150.0" layoutY="193.0" onAction="#submitAnswer" onInputMethodTextChanged="#submitAnswer" onKeyTyped="#submitAnswer" prefHeight="38.0" prefWidth="216.0" />
+      <TextField fx:id="answerField" layoutX="150.0" layoutY="193.0" onAction="#submitAnswer" onInputMethodTextChanged="#submitAnswer" onKeyTyped="#submitAnswer" prefHeight="38.0" prefWidth="216.0" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-text-fill: white;" />
    </children>
 </Pane>
