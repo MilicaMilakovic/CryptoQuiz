@@ -9,7 +9,8 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="515.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.EndGameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0"
+      prefWidth="515.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="net.etfbl.krz.cryptoquiz.EndGameController">
    <children>
       <ImageView fitHeight="319.0" fitWidth="324.0" layoutX="98.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>

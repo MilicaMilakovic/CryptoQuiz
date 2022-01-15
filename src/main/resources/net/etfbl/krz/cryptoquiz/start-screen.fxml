@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.StartController">
+<AnchorPane prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="net.etfbl.krz.cryptoquiz.StartController">
    <children>
       <Pane layoutX="-4.0" layoutY="42.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="754.0" style="-fx-background-color: linear-gradient(#31227E,#657ABF);">
          <children>
@@ -56,11 +56,6 @@
             <ImageView fx:id="triangle1112" fitHeight="67.0" fitWidth="58.0" layoutX="157.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../images/hex-white.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="63.0" layoutX="712.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../images/wrong.png" />
                </image>
             </ImageView>
             <ImageView fx:id="triangle11111" fitHeight="87.0" fitWidth="69.0" layoutX="685.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
@@ -134,6 +129,11 @@
             <ImageView fx:id="triangle" fitHeight="126.0" fitWidth="137.0" layoutX="54.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../images/triangle.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="63.0" layoutX="712.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/wrong.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="58.0" layoutX="690.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">

@@ -6,7 +6,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="515.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.SelectQuestionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="310.0" prefWidth="515.0" style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="net.etfbl.krz.cryptoquiz.SelectQuestionController">
    <children>
       <JFXRadioButton fx:id="option1" graphicTextGap="10.0" layoutX="50.0" layoutY="79.0" prefHeight="47.0" prefWidth="423.0" style="-fx-border-color: #ebebeb; -fx-padding: 10px;" text="Odgovor 1" textFill="WHITE">
          <selectedColor>

@@ -1,6 +1,5 @@
 package net.etfbl.krz.model;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.cert.CertificateFactory;
@@ -15,7 +14,6 @@ public class Certificate {
 
     // CA tijelo koje ce izdavati korisnicki sertifikat
     public static X509Certificate CA;
-
 
     static  {
         try{
