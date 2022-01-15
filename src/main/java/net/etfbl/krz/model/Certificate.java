@@ -16,6 +16,7 @@ public class Certificate {
     // CA tijelo koje ce izdavati korisnicki sertifikat
     public static X509Certificate CA;
 
+
     static  {
         try{
            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");

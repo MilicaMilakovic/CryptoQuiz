@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.StartController">
+   <children>
+      <Pane layoutX="-4.0" layoutY="42.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="754.0" style="-fx-background-color: linear-gradient(#31227E,#657ABF);">
+         <children>
+            <ImageView fx:id="triangle111121" fitHeight="50.0" fitWidth="50.0" layoutX="507.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/not_answered.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="triangle11121" fitHeight="67.0" fitWidth="58.0" layoutX="509.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/hex-white.png" />
+               </image>
+            </ImageView>
+            <JFXButton buttonType="RAISED" layoutX="538.0" layoutY="223.0" onAction="#register" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: linear-gradient(#F4A532, #FB4A4F); -fx-background-radius: 0; -fx-border-radius: 0;" text="Registruj Se" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="522.0" layoutY="154.0" prefHeight="59.0" prefWidth="123.0" text="Kreiraj novi nalog." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.5145547986030579" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <ImageView fx:id="triangle11112" fitHeight="50.0" fitWidth="50.0" layoutX="193.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/not_answered.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="triangle1112" fitHeight="67.0" fitWidth="58.0" layoutX="157.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/hex-white.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="63.0" layoutX="712.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/wrong.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="triangle11111" fitHeight="87.0" fitWidth="69.0" layoutX="685.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/not_answered.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="111.0" layoutY="223.0" onAction="#login" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: linear-gradient(#F4A532, #FB4A4F); -fx-background-radius: 0; -fx-border-radius: 0;" text="Prijavi Se" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="95.0" layoutY="154.0" prefHeight="59.0" prefWidth="123.0" text="Imaš kreiran nalog?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.5145547986030579" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Pane fx:id="pane" layoutX="241.0" layoutY="-23.0" prefHeight="446.0" prefWidth="343.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6e3f7" height="453.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="343.0">
+                     <effect>
+                        <DropShadow>
+                           <input>
+                              <GaussianBlur radius="1.0" />
+                           </input>
+                        </DropShadow>
+                     </effect>
+                  </Rectangle>
+               </children>
+            </Pane>
+            <ImageView fx:id="triangle1111" fitHeight="87.0" fitWidth="58.0" layoutX="13.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/hex-white.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="63.0" layoutX="36.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/wrong.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="triangle111" fitHeight="90.0" fitWidth="76.0" layoutX="83.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/not_answered.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="triangle11" fitHeight="150.0" fitWidth="161.0" layoutX="-9.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/hex.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="63.0" layoutX="618.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/wrong.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="triangle1" fitHeight="139.0" fitWidth="137.0" layoutX="629.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/circle.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="triangle" fitHeight="126.0" fitWidth="137.0" layoutX="54.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/triangle.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="58.0" layoutX="690.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/hex-white.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

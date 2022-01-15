@@ -3,7 +3,10 @@ package net.etfbl.krz.cryptoquiz;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import net.etfbl.krz.model.Certificate;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -46,9 +49,11 @@ public class Main extends Application {
         System.out.println(cert.getSubjectDN());
         System.out.println(cert.getIssuerDN());
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-screen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 750, 522);
+        scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Login");
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
     }

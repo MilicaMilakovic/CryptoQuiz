@@ -2,24 +2,16 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.LoginController">
+<Pane prefHeight="446.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.LoginController">
    <children>
-      <ImageView fitHeight="489.0" fitWidth="627.0" layoutX="-13.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
-         <image>
-            <Image url="@../../../../images/bg.jpg" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6e3f7" height="412.0" layoutX="293.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" width="308.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6e3f7" height="446.0" stroke="BLACK" strokeType="INSIDE" width="343.0">
          <effect>
             <DropShadow>
                <input>
@@ -28,37 +20,19 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <ImageView fx:id="triangle" fitHeight="150.0" fitWidth="200.0" layoutX="206.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true" rotate="74.4">
-         <image>
-            <Image url="@../../../../images/triangle.png" />
-         </image>
-      </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="473.0" layoutY="275.0" prefHeight="31.0" prefWidth="92.0" ripplerFill="#5851e4" style="-fx-border-color: #2D007F; -fx-border-radius: 0;" text="Registruj Se" textFill="#5264bc">
+      <JFXButton fx:id="loginBtn" layoutX="94.0" layoutY="266.0" onAction="#login" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: linear-gradient(to top,#353F9C, #6290db); -fx-border-radius: 0; -fx-background-radius: 0;" text="PRIJAVI SE" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <PasswordField layoutX="365.0" layoutY="203.0" prefHeight="31.0" prefWidth="194.0" />
-      <TextField layoutX="365.0" layoutY="147.0" prefHeight="31.0" prefWidth="194.0" />
-      <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="365.0" layoutY="275.0" onAction="#login" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: linear-gradient(#F4A532, #FB4A4F); -fx-background-radius: 0; -fx-border-radius: 0;" text="Prijavi Se" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
+      <Label layoutX="154.0" layoutY="75.0" text="Prijava" textFill="#150404" />
+      <JFXButton layoutX="128.0" layoutY="323.0" onAction="#addQuestion" text="Dodaj pitanje">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <ImageView fitHeight="40.0" fitWidth="63.0" layoutX="440.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/wrong.png" />
-         </image>
-      </ImageView>
-      <JFXButton layoutX="478.0" layoutY="361.0" onAction="#addQuestion" text="Dodaj pitanje">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXButton>
    </children>
 </Pane>

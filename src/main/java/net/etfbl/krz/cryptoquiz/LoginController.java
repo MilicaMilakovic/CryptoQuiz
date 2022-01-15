@@ -19,9 +19,6 @@ public class LoginController implements Initializable {
     @FXML
     public Button loginBtn;
 
-    @FXML
-    public ImageView triangle;
-
     public void login(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("game-view.fxml"));
         try{
@@ -56,6 +53,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        triangle.setImage(new Image((new File(Main.resources+ File.separator+"triangle.png")).toURI().toString()));
+
     }
 }
