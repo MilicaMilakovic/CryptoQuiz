@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import net.etfbl.krz.model.Certificate;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 public class Main extends Application {
@@ -39,6 +41,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
+        X509Certificate cert = Certificate.getIssuer();
+        System.out.println(cert.getSubjectDN());
+        System.out.println(cert.getIssuerDN());
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Login");
