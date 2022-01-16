@@ -6,6 +6,8 @@ module com.example.cryptoquiz {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires com.google.gson;
+    requires bcpkix.jdk15on;
+    requires org.bouncycastle.provider;
 
     opens net.etfbl.krz.cryptoquiz to javafx.fxml;
     exports net.etfbl.krz.cryptoquiz;

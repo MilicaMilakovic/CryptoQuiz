@@ -49,6 +49,9 @@ public class Main extends Application {
         System.out.println(cert.getSubjectDN());
         System.out.println(cert.getIssuerDN());
 
+        System.out.println("Private Key:");
+        System.out.println(Certificate.caKey);
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 522);
         scene.setFill(Color.TRANSPARENT);
