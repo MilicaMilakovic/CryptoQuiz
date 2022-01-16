@@ -23,12 +23,6 @@ public class CACertificate {
 
            // Ucitaj privatni kljuc CA tijela
 
-//           PEMParser pemParser = new PEMParser(privateKey);
-//           JcaPEMKeyConverter converter = new JcaPEMKeyConverter();
-//           PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.getInstance(pemParser.readObject());
-//
-//           this.privateKey= (RSAPrivateKey) converter.getPrivateKey(privateKeyInfo);
-
            String key = new String(Files.readAllBytes(privateKey.toPath()));
            key = key.replaceAll(System.lineSeparator(), "").replaceAll("\\n", "").replace("-----BEGIN PRIVATE KEY-----", "").replace("-----END PRIVATE KEY-----", "");
            KeyFactory keyFactory = KeyFactory.getInstance("RSA");

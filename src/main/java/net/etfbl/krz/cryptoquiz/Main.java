@@ -8,6 +8,11 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.etfbl.krz.model.Certificate;
+import org.bouncycastle.asn1.x500.RDN;
+import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x500.style.IETFUtils;
+import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
@@ -43,14 +48,24 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
 
         X509Certificate cert = Certificate.getIssuer();
         System.out.println(cert.getSubjectDN());
         System.out.println(cert.getIssuerDN());
+        X500Name rootCertIssuer = new JcaX509CertificateHolder(Certificate.CA).getSubject();
+        X500Name x500name = new JcaX509CertificateHolder(cert).getSubject();
+        RDN cn = x500name.getRDNs(BCStyle.CN)[0];
+
+        String s= IETFUtils.valueToString(cn.getFirst().getValue());
+        System.out.println("------");
+        System.out.println(s);
+
 
         System.out.println("Private Key:");
         System.out.println(Certificate.caKey);
+        System.out.println("-------");
+        System.out.println(Certificate.CA.getPublicKey());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 522);
