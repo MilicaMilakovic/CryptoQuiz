@@ -1,12 +1,7 @@
 package net.etfbl.krz.model;
 
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
-
-import  org.bouncycastle.openssl.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.security.KeyFactory;
 import java.security.cert.CertificateFactory;
@@ -14,9 +9,6 @@ import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
-
-import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
-
 
 
 public class CACertificate {
