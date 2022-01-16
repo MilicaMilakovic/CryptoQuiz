@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -20,7 +26,7 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <JFXButton fx:id="loginBtn" layoutX="94.0" layoutY="266.0" onAction="#login" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: linear-gradient(to top,#353F9C, #6290db); -fx-border-radius: 0; -fx-background-radius: 0;" text="PRIJAVI SE" textFill="WHITE">
+      <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="95.0" layoutY="306.0" onAction="#login" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: linear-gradient(to top,#353F9C, #6290db); -fx-border-radius: 0; -fx-background-radius: 0;" text="PRIJAVI SE" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -28,11 +34,64 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="154.0" layoutY="75.0" text="Prijava" textFill="#150404" />
-      <JFXButton layoutX="128.0" layoutY="323.0" onAction="#addQuestion" text="Dodaj pitanje">
+      <JFXButton layoutX="128.0" layoutY="362.0" onAction="#addQuestion" text="Dodaj pitanje">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <ImageView fitHeight="80.0" fitWidth="74.0" layoutX="135.0" layoutY="73.0" opacity="0.63" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/certificate.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="115.0" layoutY="140.0" prefHeight="70.0" prefWidth="115.0" text="Učitajte svoj digitalni sertifikat" textAlignment="CENTER" textFill="#150404" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" graphicTextGap="15.0" layoutX="95.0" layoutY="252.0" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: #FFE5C0; -fx-border-radius: 0; -fx-background-radius: 0; -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1.5;" text="UČITAJ" textFill="#151a6a">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <FontAwesomeIconView fill="#151a6a" glyphName="UPLOAD" />
+         </graphic>
+      </JFXButton>
+      <Label layoutX="128.0" layoutY="23.0" text="PRIJAVA">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.1764705926179886" blue="0.49803921580314636" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3843137323856354" green="0.5647059082984924" blue="0.8588235378265381" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <effect>
+            <DropShadow radius="8.83" width="16.32">
+               <color>
+                  <Color opacity="0.284246563911438" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="85.0" layoutY="218.0" prefHeight="17.0" prefWidth="189.0" text="Putanja do ucitanog sertifikata....">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
