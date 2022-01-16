@@ -50,7 +50,6 @@ public class Certificate {
     public static final String localityName = "Banja Luka";
     public static final String organizationName = "Elektrotehnicki fakulet";
     public static final String organizationalUnitName = "ETF";
-    public static final int validityDays = 365;
 
     static  {
         try{
@@ -103,7 +102,12 @@ public class Certificate {
 
         calendar.add(Calendar.YEAR, 1);
         Date endDate = calendar.getTime();
-        X500Name issuedCertSubject = new X500Name("CN="+player.getUsername());
+
+        String params = "C="+countryName + ", ST="+stateOrProvinceName+ ", L="+localityName
+                        +", O="+organizationName+ ", OU="+organizationalUnitName+ ", CN="+player.getUsername()+", E="+player.getEmail();
+
+        X500Name issuedCertSubject = new X500Name(params);
+
         BigInteger issuedCertSerialNum = new BigInteger(Long.toString(new SecureRandom().nextLong()));
         KeyPair issuedCertKeyPair = keyPairGenerator.generateKeyPair();
 
