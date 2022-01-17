@@ -41,7 +41,10 @@
       <Label layoutX="82.0" layoutY="65.0" text="Korisničko ime:" textFill="#2d007f" />
       <Label layoutX="82.0" layoutY="133.0" text="Lozinka" textFill="#2d007f" />
       <Label layoutX="82.0" layoutY="203.0" text="Email adresa" textFill="#2d007f" />
-      <Label layoutX="71.0" layoutY="333.0" prefHeight="27.0" prefWidth="216.0" text="Putanja do digitalnog sertifikata....." />
+      <Label fx:id="certificatePath" layoutX="71.0" layoutY="333.0" prefHeight="27.0" prefWidth="216.0" text="Putanja do digitalnog sertifikata....." textFill="#2d007f">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <FontAwesomeIconView fill="#2d007f" glyphName="USER" layoutX="66.0" layoutY="78.0" />
       <FontAwesomeIconView fill="#2d007f" glyphName="LOCK" layoutX="66.0" layoutY="145.0" />
       <FontAwesomeIconView fill="#2d007f" glyphName="AT" layoutX="66.0" layoutY="217.0" text="" wrappingWidth="17.485726356506348" />
