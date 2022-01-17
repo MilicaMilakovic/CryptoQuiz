@@ -1,6 +1,7 @@
 package net.etfbl.krz.cryptography;
 
 import net.etfbl.krz.model.Player;
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -12,19 +13,24 @@ import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.openssl.PKCS8Generator;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.pkcs.PKCS10CertificationRequestBuilder;
 import org.bouncycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 import org.bouncycastle.util.encoders.Base64;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemWriter;
 
 import java.io.*;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,7 +46,7 @@ public class Certificate {
     public static X509Certificate CA;
     public static RSAPrivateKey caKey;
 
-    private static final String BC_PROVIDER = "BC";
+    public static final String BC_PROVIDER = "BC";
     private static final String KEY_ALGORITHM = "RSA";
     private static final String SIGNATURE_ALGORITHM = "SHA256withRSA";
 
@@ -58,11 +64,11 @@ public class Certificate {
             FileInputStream inStream = new FileInputStream(caDir+"ca1.crt");
             File keyReader = new File(privDir+"ca1_pkcs8.key");
 
-            ca.add(new CACertificate(inStream,keyReader));
+            ca.add(new CACertificate(inStream,keyReader,1));
 
             inStream = new FileInputStream(caDir+"ca2.crt");
             keyReader = new File(privDir+"ca2_pkcs8.key");
-            ca.add(new CACertificate(inStream,keyReader));
+            ca.add(new CACertificate(inStream,keyReader,2));
 
            System.out.println("CA Tijela ucitana! " );
            inStream.close();
@@ -134,8 +140,10 @@ public class Certificate {
         // CA verifikuje sertifikat svojim javnim kljucem
         issuedCert.verify(Certificate.CA.getPublicKey(), BC_PROVIDER);
 
+        System.out.println("Private Key:");
+//        System.out.println(issuedCertKeyPair.getPrivate().toString());
+        writeKeyToFile(issuedCertKeyPair.getPrivate(),outputDir.getAbsolutePath()+File.separator+player.getUsername()+"Private.key");
         writeCertToFile(issuedCert, outputDir.getAbsolutePath()+File.separator+player.getUsername()+".cer");
-//        exportKeyPairToKeystoreFile(issuedCertKeyPair, issuedCert, username, username+".pfx", "PKCS12", "password");
 
     }
     static void writeCertToFile(X509Certificate certificate, String fileName) throws Exception {
@@ -145,13 +153,22 @@ public class Certificate {
         certificateOut.write("\n-----END CERTIFICATE-----".getBytes());
         certificateOut.close();
     }
-//    static void exportKeyPairToKeystoreFile(KeyPair keyPair, Certificate certificate, String alias, String fileName, String storeType, String storePass) throws Exception {
-//        KeyStore sslKeyStore = KeyStore.getInstance(storeType, BC_PROVIDER);
-//        sslKeyStore.load(null, null);
-////        sslKeyStore.setKeyEntry(alias, keyPair.getPrivate(),null, new Certificate[]{certificate});
-////        FileOutputStream keyStoreOs = new FileOutputStream();
-////        sslKeyStore.store(keyStoreOs, storePass.toCharArray());
-//    }
+
+    public static void writeKeyToFile(PrivateKey key,String filename) throws Exception{
+
+//        PemObject pemObject = new PemObject("RSA PRIVATE KEY",key.getEncoded());
+//        PemWriter writer = new PemWriter(new FileWriter(new File(filename)));
+//        writer.writeObject(pemObject.generate());
+
+        String str = "-----BEGIN PRIVATE KEY-----\n";
+        str+= java.util.Base64.getEncoder().encodeToString(key.getEncoded());
+        str+="\n-----END PRIVATE KEY-----\n";
+
+        System.out.println(str);
+        FileOutputStream fis = new FileOutputStream(new File(filename));
+        fis.write(str.getBytes(StandardCharsets.UTF_8));
+        fis.close();
+    }
 
     public static String getCommonName(X509Certificate certificate) throws Exception{
         X500Name x500name = new JcaX509CertificateHolder(certificate).getSubject();
@@ -162,5 +179,17 @@ public class Certificate {
     public static X509Certificate loadUserCertificate(FileInputStream fis) throws Exception{
         CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
         return  (X509Certificate)certificateFactory.generateCertificate(fis);
+    }
+
+    public static void getIssuerCertificate(int id){
+        for (CACertificate cert : ca)
+        {
+            if(cert.getId()==id)
+            {
+                CA = cert.getCertificate();
+                caKey = cert.getPrivateKey();
+                break;
+            }
+        }
     }
 }

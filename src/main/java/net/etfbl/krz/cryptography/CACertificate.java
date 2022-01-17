@@ -9,13 +9,15 @@ import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
+import java.util.Objects;
 
 
 public class CACertificate {
     private X509Certificate certificate;
     private RSAPrivateKey privateKey;
+    private int id;
 
-    public CACertificate(FileInputStream certificate, File privateKey) {
+    public CACertificate(FileInputStream certificate, File privateKey,int id) {
        try{
            // Ucitaj sertifikat CA tijela
            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
@@ -30,12 +32,15 @@ public class CACertificate {
            PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(key));
            this.privateKey =(RSAPrivateKey) keyFactory.generatePrivate(keySpecPKCS8);
 
+           this.id = id;
+
        } catch (Exception e){
            e.printStackTrace();
        }
     }
 
-    public CACertificate() {
+    public CACertificate(int id) {
+        this.id = id;
     }
 
     public X509Certificate getCertificate() {
@@ -52,5 +57,26 @@ public class CACertificate {
 
     public void setPrivateKey(RSAPrivateKey privateKey) {
         this.privateKey = privateKey;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CACertificate that = (CACertificate) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

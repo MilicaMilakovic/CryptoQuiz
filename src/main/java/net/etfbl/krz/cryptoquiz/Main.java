@@ -54,22 +54,22 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        X509Certificate cert = Certificate.getIssuer();
-        System.out.println(cert.getSubjectDN());
-        System.out.println(cert.getIssuerDN());
-        X500Name rootCertIssuer = new JcaX509CertificateHolder(Certificate.CA).getSubject();
-        X500Name x500name = new JcaX509CertificateHolder(cert).getSubject();
-        RDN cn = x500name.getRDNs(BCStyle.CN)[0];
+//        X509Certificate cert = Certificate.getIssuer();
+//        System.out.println(cert.getSubjectDN());
+//        System.out.println(cert.getIssuerDN());
+//        X500Name rootCertIssuer = new JcaX509CertificateHolder(Certificate.CA).getSubject();
+//        X500Name x500name = new JcaX509CertificateHolder(cert).getSubject();
+//        RDN cn = x500name.getRDNs(BCStyle.CN)[0];
+//
+//        String s= IETFUtils.valueToString(cn.getFirst().getValue());
+//        System.out.println("------");
+//        System.out.println(s);
 
-        String s= IETFUtils.valueToString(cn.getFirst().getValue());
-        System.out.println("------");
-        System.out.println(s);
 
-
-        System.out.println("Private Key:");
-        System.out.println(Certificate.caKey);
-        System.out.println("-------");
-        System.out.println(Certificate.CA.getPublicKey());
+//        System.out.println("Private Key:");
+//        System.out.println(Certificate.caKey);
+//        System.out.println("-------");
+//        System.out.println(Certificate.CA.getPublicKey());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 522);

@@ -8,11 +8,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.etfbl.krz.cryptography.CACertificate;
 import net.etfbl.krz.cryptography.Certificate;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
+import java.security.Security;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ResourceBundle;
 
@@ -23,8 +27,22 @@ public class LoginController implements Initializable {
     Label certPath;
 
     public void login(){
+        Security.addProvider(new BouncyCastleProvider());
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("game-view.fxml"));
         try{
+            X509Certificate certificate = Certificate.loadUserCertificate(new FileInputStream(new File(certPath.getText())));
+            String issuer = certificate.getIssuerDN().getName().replace("CN=","");
+            System.out.println("Sertifikat izdao:" + issuer);
+
+            if(issuer.equals("CA_TIJELO1")){
+                Certificate.getIssuerCertificate(1);
+            } else {
+                Certificate.getIssuerCertificate(2);
+            }
+
+            certificate.verify(Certificate.CA.getPublicKey(), Certificate.BC_PROVIDER);
+            System.out.println("Sertifikat verifikovan!");
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);
             stage.setTitle("Login");
@@ -33,8 +51,10 @@ public class LoginController implements Initializable {
 
             Stage thisStage = (Stage) loginBtn.getScene().getWindow();
             thisStage.close();
-        } catch (Exception e){
-            e.printStackTrace();
+        }
+        catch (Exception e){
+            System.out.println("Sertifikat nevazeci!" + e.getMessage());
+//            e.printStackTrace();
         }
     }
 
