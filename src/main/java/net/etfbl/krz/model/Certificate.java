@@ -82,7 +82,7 @@ public class Certificate {
 
         Security.addProvider(new BouncyCastleProvider());
 
-        // rootCaIssuer
+        // CA tijelo koje izdaje sertifikat
         X500Name x500name = new JcaX509CertificateHolder(Certificate.CA).getSubject();
         RDN cn = x500name.getRDNs(BCStyle.CN)[0];
 
@@ -130,18 +130,18 @@ public class Certificate {
         issuedCertBuilder.addExtension(Extension.keyUsage, false, new KeyUsage(KeyUsage.keyEncipherment));
         issuedCertBuilder.addExtension(Extension.extendedKeyUsage, false, new ExtendedKeyUsage(KeyPurposeId.id_kp_clientAuth));
 
-
+        // izdavanje sertifikata
         X509CertificateHolder issuedCertHolder = issuedCertBuilder.build(csrContentSigner);
         X509Certificate issuedCert  = new JcaX509CertificateConverter().setProvider(BC_PROVIDER).getCertificate(issuedCertHolder);
 
         // CA verifikuje sertifikat svojim javnim kljucem
         issuedCert.verify(Certificate.CA.getPublicKey(), BC_PROVIDER);
 
-        writeCertToFileBase64Encoded(issuedCert, player.getUsername()+".cer");
+        writeCertToFile(issuedCert, player.getUsername()+".cer");
 //        exportKeyPairToKeystoreFile(issuedCertKeyPair, issuedCert, username, username+".pfx", "PKCS12", "password");
 
     }
-    static void writeCertToFileBase64Encoded(X509Certificate certificate, String fileName) throws Exception {
+    static void writeCertToFile(X509Certificate certificate, String fileName) throws Exception {
         FileOutputStream certificateOut = new FileOutputStream(new File(fileName));
         certificateOut.write("-----BEGIN CERTIFICATE-----\n".getBytes());
         certificateOut.write(Base64.encode(certificate.getEncoded()));

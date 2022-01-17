@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
@@ -30,11 +31,14 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <TextField fx:id="username" layoutX="66.0" layoutY="89.0" prefHeight="32.0" prefWidth="216.0" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
       <TextField fx:id="password" layoutX="66.0" layoutY="158.0" prefHeight="32.0" prefWidth="216.0" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
       <TextField fx:id="email" layoutX="66.0" layoutY="226.0" prefHeight="32.0" prefWidth="216.0" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
-      <Label layoutX="82.0" layoutY="65.0" text="Korisnicko ime:" textFill="#2d007f" />
+      <Label layoutX="82.0" layoutY="65.0" text="Korisničko ime:" textFill="#2d007f" />
       <Label layoutX="82.0" layoutY="133.0" text="Lozinka" textFill="#2d007f" />
       <Label layoutX="82.0" layoutY="203.0" text="Email adresa" textFill="#2d007f" />
       <Label layoutX="71.0" layoutY="333.0" prefHeight="27.0" prefWidth="216.0" text="Putanja do digitalnog sertifikata....." />
@@ -46,7 +50,7 @@
             <Image url="@../../../../images/certificate.png" />
          </image>
       </ImageView>
-      <Label layoutX="96.0" layoutY="283.0" prefHeight="39.0" prefWidth="173.0" text="Vas sertifikat se nalazi na sljedecoj putanji:" textAlignment="CENTER" textFill="#2d007f" wrapText="true">
+      <Label layoutX="96.0" layoutY="283.0" prefHeight="39.0" prefWidth="173.0" text="Vas sertifikat se nalazi na sljedećoj putanji:" textAlignment="CENTER" textFill="#2d007f" wrapText="true">
          <font>
             <Font size="13.0" />
          </font>

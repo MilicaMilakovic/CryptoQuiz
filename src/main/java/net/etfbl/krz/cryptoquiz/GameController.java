@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import net.etfbl.krz.model.Player;
 import net.etfbl.krz.model.Question;
 import net.etfbl.krz.steganography.Steganography;
 
@@ -22,6 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class GameController implements Initializable {
+
+    public static Player player;
+
     @FXML
     public Pane questionPane;
     @FXML
