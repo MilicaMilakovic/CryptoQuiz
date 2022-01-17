@@ -1,4 +1,4 @@
-package net.etfbl.krz.model;
+package net.etfbl.krz.cryptography;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

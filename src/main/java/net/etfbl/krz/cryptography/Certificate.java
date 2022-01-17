@@ -1,5 +1,6 @@
-package net.etfbl.krz.model;
+package net.etfbl.krz.cryptography;
 
+import net.etfbl.krz.model.Player;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -17,8 +18,7 @@ import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.pkcs.PKCS10CertificationRequestBuilder;
 import org.bouncycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 import org.bouncycastle.util.encoders.Base64;
-import org.bouncycastle.x509.X509V3CertificateGenerator;
-import org.bouncycastle.asn1.bsi.BSIObjectIdentifiers;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.security.*;

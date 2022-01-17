@@ -1,4 +1,4 @@
-package net.etfbl.krz.steganography;
+package net.etfbl.krz.cryptography;
 
 import java.io.File;
 import java.io.FileInputStream;

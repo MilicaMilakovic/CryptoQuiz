@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.etfbl.krz.model.Question;
@@ -15,19 +14,16 @@ import net.etfbl.krz.model.Question;
 import java.io.File;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import com.google.gson.Gson;
-import net.etfbl.krz.steganography.Steganography;
+import net.etfbl.krz.cryptography.Steganography;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 
 public class AddQuestionController implements Initializable {
 

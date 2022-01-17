@@ -3,9 +3,9 @@ package net.etfbl.krz.cryptoquiz;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import net.etfbl.krz.model.Certificate;
+import net.etfbl.krz.cryptography.Certificate;
 import net.etfbl.krz.model.Player;
-import net.etfbl.krz.model.SecurityUtil;
+import net.etfbl.krz.cryptography.SecurityUtil;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

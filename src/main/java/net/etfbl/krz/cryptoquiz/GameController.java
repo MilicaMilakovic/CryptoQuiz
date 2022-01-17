@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import net.etfbl.krz.model.Player;
 import net.etfbl.krz.model.Question;
-import net.etfbl.krz.steganography.Steganography;
+import net.etfbl.krz.cryptography.Steganography;
 
 import javax.crypto.Cipher;
 import java.io.File;

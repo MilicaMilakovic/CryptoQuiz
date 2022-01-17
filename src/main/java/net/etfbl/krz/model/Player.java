@@ -6,6 +6,8 @@ public class Player {
     private String username;
     private String password;
     private String email;
+    private int result;
+    private String time;
 
     public Player(String username, String password, String email) {
         this.username = username;
@@ -57,5 +59,21 @@ public class Player {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

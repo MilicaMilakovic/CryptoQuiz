@@ -1,4 +1,4 @@
-package net.etfbl.krz.model;
+package net.etfbl.krz.cryptography;
 
 import java.io.File;
 import java.io.FileInputStream;
