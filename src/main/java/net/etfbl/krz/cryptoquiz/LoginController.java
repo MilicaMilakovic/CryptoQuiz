@@ -11,10 +11,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.etfbl.krz.model.Certificate;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.security.cert.X509Certificate;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -65,6 +68,14 @@ public class LoginController implements Initializable {
 
         if(cert!=null){
             certPath.setText(cert.getAbsolutePath());
+            try{
+                FileInputStream fileInputStream = new FileInputStream(cert);
+                X509Certificate userCertificate = Certificate.loadUserCertificate(fileInputStream);
+                String user = Certificate.getCommonName(userCertificate);
+                System.out.println("This certificate belongs to:" + user);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
             loginBtn.setDisable(false);
         }
     }

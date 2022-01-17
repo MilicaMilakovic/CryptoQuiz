@@ -6,6 +6,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import net.etfbl.krz.model.Certificate;
 import net.etfbl.krz.model.Player;
+import net.etfbl.krz.model.SecurityUtil;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrationController {
     @FXML
@@ -25,9 +33,34 @@ public class RegistrationController {
 
         Player player = new Player(user,pass,mail);
         try {
-            Certificate.issueUserCertificate(player);
+            if(usernameAvailable(player.getUsername())){
+                String hash = SecurityUtil.hashFunction(player.getUsername());
+                new File(Main.playersDir+File.separator+hash).mkdir();
+                File outputDir= new File(Main.playersDir+File.separator+ hash+File.separator);
+                Certificate.issueUserCertificate(player, outputDir);
+            } else
+                System.out.println("Korisnicko ime je zauzeto");
+
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private boolean usernameAvailable(String username){
+        String hash = SecurityUtil.hashFunction(username);
+        List<String> players;
+        try {
+            players = Files.readAllLines(Paths.get(Main.playersList));
+            if(players.contains(hash))
+                return false;
+
+           FileOutputStream fos = new FileOutputStream(new File(Main.playersList),true);
+           fos.write(hash.getBytes(StandardCharsets.UTF_8));
+           fos.write("\n".getBytes(StandardCharsets.UTF_8));
+           fos.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return  true;
     }
 }

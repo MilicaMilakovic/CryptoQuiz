@@ -8,6 +8,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.etfbl.krz.model.Certificate;
+import net.etfbl.krz.model.SecurityUtil;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -29,15 +30,21 @@ public class Main extends Application {
 
     public static final  String questionsDir = (new File("src/main/resources/questions")).getAbsolutePath();
 
+    public static final String playersDir = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=")).getAbsolutePath();
+    public static final String playersList = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=/c1zxZl0P029IZeS8dDmr42lXLgQ=.txt")).getAbsolutePath();
+
     public static final SecretKeySpec stegoKey;
 
     static {
         // Kljuc za dekripciju pitanja sakrivenog u slici je otisak lozinke SIGURNOST
 
         byte[] key = "SIGURNOST".getBytes(StandardCharsets.UTF_8);
+
         MessageDigest sha = null;
         try {
             sha = MessageDigest.getInstance("SHA-1");
+
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

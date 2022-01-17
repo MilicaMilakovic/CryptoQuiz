@@ -78,15 +78,12 @@ public class Certificate {
         return CA;
     }
 
-    public static void issueUserCertificate(Player player) throws Exception{
+    public static void issueUserCertificate(Player player, File outputDir) throws Exception{
 
         Security.addProvider(new BouncyCastleProvider());
 
         // CA tijelo koje izdaje sertifikat
-        X500Name x500name = new JcaX509CertificateHolder(Certificate.CA).getSubject();
-        RDN cn = x500name.getRDNs(BCStyle.CN)[0];
-
-        String s= IETFUtils.valueToString(cn.getFirst().getValue());
+        String s= getCommonName(Certificate.CA);
         X500Name rootCertIssuer = new X500Name("CN="+s);
 
         // generisi kljuceve za korisnika
@@ -137,7 +134,7 @@ public class Certificate {
         // CA verifikuje sertifikat svojim javnim kljucem
         issuedCert.verify(Certificate.CA.getPublicKey(), BC_PROVIDER);
 
-        writeCertToFile(issuedCert, player.getUsername()+".cer");
+        writeCertToFile(issuedCert, outputDir.getAbsolutePath()+File.separator+player.getUsername()+".cer");
 //        exportKeyPairToKeystoreFile(issuedCertKeyPair, issuedCert, username, username+".pfx", "PKCS12", "password");
 
     }
@@ -155,4 +152,15 @@ public class Certificate {
 ////        FileOutputStream keyStoreOs = new FileOutputStream();
 ////        sslKeyStore.store(keyStoreOs, storePass.toCharArray());
 //    }
+
+    public static String getCommonName(X509Certificate certificate) throws Exception{
+        X500Name x500name = new JcaX509CertificateHolder(certificate).getSubject();
+        RDN cn = x500name.getRDNs(BCStyle.CN)[0];
+        return IETFUtils.valueToString(cn.getFirst().getValue());
+    }
+
+    public static X509Certificate loadUserCertificate(FileInputStream fis) throws Exception{
+        CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+        return  (X509Certificate)certificateFactory.generateCertificate(fis);
+    }
 }
