@@ -10,6 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.etfbl.krz.cryptography.CACertificate;
 import net.etfbl.krz.cryptography.Certificate;
+import net.etfbl.krz.model.Player;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.File;
@@ -18,7 +19,10 @@ import java.net.URL;
 import java.security.Security;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.security.interfaces.RSAPrivateKey;
 import java.util.ResourceBundle;
+
+import static net.etfbl.krz.cryptography.Certificate.getIssuerCertificate;
 
 public class LoginController implements Initializable {
     @FXML
@@ -35,14 +39,21 @@ public class LoginController implements Initializable {
             String issuer = certificate.getIssuerDN().getName().replace("CN=","");
             System.out.println("Sertifikat izdao:" + issuer);
 
+            Player player = new Player();
+            player.setUsername(Certificate.getCommonName(certificate));
+            player.setEmail(Certificate.getEmail(certificate));
+
+           X509Certificate issuerCert;
             if(issuer.equals("CA_TIJELO1")){
-                Certificate.getIssuerCertificate(1);
+                issuerCert = getIssuerCertificate(1);
             } else {
-                Certificate.getIssuerCertificate(2);
+                issuerCert = getIssuerCertificate(2);
             }
 
-            certificate.verify(Certificate.CA.getPublicKey(), Certificate.BC_PROVIDER);
+            certificate.verify(issuerCert.getPublicKey(), Certificate.BC_PROVIDER);
             System.out.println("Sertifikat verifikovan!");
+
+            GameController.player = player;
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);
             stage.setTitle("Login");

@@ -22,11 +22,10 @@ import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 public class Main extends Application {
+
     public static final File file = new File("src/main/resources/images");
     public static final String resources = file.getAbsolutePath();
-
     public static final  String questionsDir = (new File("src/main/resources/questions")).getAbsolutePath();
-
     public static final String playersDir = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=")).getAbsolutePath();
     public static final String playersList = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=/c1zxZl0P029IZeS8dDmr42lXLgQ=.txt")).getAbsolutePath();
 
@@ -36,12 +35,9 @@ public class Main extends Application {
         // Kljuc za dekripciju pitanja sakrivenog u slici je otisak lozinke SIGURNOST
 
         byte[] key = "SIGURNOST".getBytes(StandardCharsets.UTF_8);
-
         MessageDigest sha = null;
         try {
             sha = MessageDigest.getInstance("SHA-1");
-
-
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -54,16 +50,16 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-//        X509Certificate cert = Certificate.getIssuer();
-//        System.out.println(cert.getSubjectDN());
-//        System.out.println(cert.getIssuerDN());
-//        X500Name rootCertIssuer = new JcaX509CertificateHolder(Certificate.CA).getSubject();
-//        X500Name x500name = new JcaX509CertificateHolder(cert).getSubject();
-//        RDN cn = x500name.getRDNs(BCStyle.CN)[0];
-//
-//        String s= IETFUtils.valueToString(cn.getFirst().getValue());
-//        System.out.println("------");
-//        System.out.println(s);
+        X509Certificate cert = Certificate.getIssuer();
+        System.out.println(cert.getSubjectDN());
+        System.out.println(cert.getIssuerDN());
+        X500Name rootCertIssuer = new JcaX509CertificateHolder(Certificate.CA).getSubject();
+        X500Name x500name = new JcaX509CertificateHolder(cert).getSubject();
+        RDN cn = x500name.getRDNs(BCStyle.CN)[0];
+
+        String s= IETFUtils.valueToString(cn.getFirst().getValue());
+        System.out.println("------");
+        System.out.println(s);
 
 
 //        System.out.println("Private Key:");

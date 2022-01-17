@@ -53,6 +53,7 @@ public class GameController implements Initializable {
     private boolean gameEnd = false;
     String correctAnswer="";
     int correctAnswers = 0;
+    String time="";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,6 +85,7 @@ public class GameController implements Initializable {
                 long end = System.currentTimeMillis();
                 Platform.runLater(()->
                 timer.setText((new SimpleDateFormat("mm:ss").format(new Date(end - start)))));
+                time = timer.getText();
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e) {
@@ -198,6 +200,9 @@ public class GameController implements Initializable {
     }
 
     public void loadFinishScreen(){
+        player.setResult(correctAnswers);
+        player.setTime(time);
+        System.out.println(player);
         Parent root = null;
         EndGameController.score = correctAnswers;
         nextQuestionBtn.setVisible(false);

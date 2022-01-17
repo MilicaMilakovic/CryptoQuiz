@@ -39,10 +39,6 @@ public class CACertificate {
        }
     }
 
-    public CACertificate(int id) {
-        this.id = id;
-    }
-
     public X509Certificate getCertificate() {
         return certificate;
     }

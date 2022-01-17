@@ -15,17 +15,7 @@ public class Player {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return Objects.equals(username, player.username);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username);
+    public Player() {
     }
 
     public String getUsername() {
@@ -38,15 +28,6 @@ public class Player {
 
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 
     public void setPassword(String password) {
@@ -75,5 +56,29 @@ public class Player {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", result=" + result +
+                ", time='" + time + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(username, player.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }

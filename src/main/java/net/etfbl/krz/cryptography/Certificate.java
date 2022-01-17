@@ -140,7 +140,7 @@ public class Certificate {
         // CA verifikuje sertifikat svojim javnim kljucem
         issuedCert.verify(Certificate.CA.getPublicKey(), BC_PROVIDER);
 
-        System.out.println("Private Key:");
+//        System.out.println("Private Key:");
 //        System.out.println(issuedCertKeyPair.getPrivate().toString());
         writeKeyToFile(issuedCertKeyPair.getPrivate(),outputDir.getAbsolutePath()+File.separator+player.getUsername()+"Private.key");
         writeCertToFile(issuedCert, outputDir.getAbsolutePath()+File.separator+player.getUsername()+".cer");
@@ -164,7 +164,7 @@ public class Certificate {
         str+= java.util.Base64.getEncoder().encodeToString(key.getEncoded());
         str+="\n-----END PRIVATE KEY-----\n";
 
-        System.out.println(str);
+//        System.out.println(str);
         FileOutputStream fis = new FileOutputStream(new File(filename));
         fis.write(str.getBytes(StandardCharsets.UTF_8));
         fis.close();
@@ -176,20 +176,25 @@ public class Certificate {
         return IETFUtils.valueToString(cn.getFirst().getValue());
     }
 
+    public static String getEmail(X509Certificate certificate) throws Exception{
+        X500Name x500name = new JcaX509CertificateHolder(certificate).getSubject();
+        RDN cn = x500name.getRDNs(BCStyle.E)[0];
+        return IETFUtils.valueToString(cn.getFirst().getValue());
+    }
+
     public static X509Certificate loadUserCertificate(FileInputStream fis) throws Exception{
         CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
         return  (X509Certificate)certificateFactory.generateCertificate(fis);
     }
 
-    public static void getIssuerCertificate(int id){
+    public static X509Certificate getIssuerCertificate(int id){
         for (CACertificate cert : ca)
         {
             if(cert.getId()==id)
             {
-                CA = cert.getCertificate();
-                caKey = cert.getPrivateKey();
-                break;
+               return cert.getCertificate();
             }
         }
+        return null;
     }
 }
