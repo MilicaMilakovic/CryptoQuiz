@@ -6,15 +6,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.etfbl.krz.cryptography.CACertificate;
 import net.etfbl.krz.cryptography.Certificate;
+import net.etfbl.krz.cryptography.SecurityUtil;
 import net.etfbl.krz.model.Player;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
 import java.net.URL;
 import java.security.Security;
 import java.security.cert.CertificateException;
@@ -28,6 +29,8 @@ public class LoginController implements Initializable {
     @FXML
     public Button loginBtn;
     @FXML
+    public PasswordField passwordField;
+    @FXML
     Label certPath;
 
     public void login(){
@@ -35,14 +38,19 @@ public class LoginController implements Initializable {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("game-view.fxml"));
         try{
+
+            // procitaj potrebne podatke iz ucitanog sertifikata
             X509Certificate certificate = Certificate.loadUserCertificate(new FileInputStream(new File(certPath.getText())));
             String issuer = certificate.getIssuerDN().getName().replace("CN=","");
             System.out.println("Sertifikat izdao:" + issuer);
 
+            // sacuvaj podatke o igracu
             Player player = new Player();
             player.setUsername(Certificate.getCommonName(certificate));
             player.setEmail(Certificate.getEmail(certificate));
+            player.setPassword(passwordField.getText());
 
+            // ucitaj sertifikat ca tijela koje je izdalo sert
            X509Certificate issuerCert;
             if(issuer.equals("CA_TIJELO1")){
                 issuerCert = getIssuerCertificate(1);
@@ -50,9 +58,30 @@ public class LoginController implements Initializable {
                 issuerCert = getIssuerCertificate(2);
             }
 
+            // verifikuj uneseni sertifikat
             certificate.verify(issuerCert.getPublicKey(), Certificate.BC_PROVIDER);
             System.out.println("Sertifikat verifikovan!");
 
+            // azuriraj broj prijava
+
+            String hash = SecurityUtil.hashFunction(player.getUsername());
+            hash = hash.replace("/","%2F");
+            File countFile= new File(Main.playersDir+File.separator+ hash+File.separator+"count.txt");
+
+            BufferedReader br = new BufferedReader(new FileReader(countFile));
+            int count = Integer.parseInt(br.readLine());
+            br.close();
+
+            ++ count;
+            System.out.println("count=" + count);
+
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(countFile));
+            bufferedWriter.write(String.valueOf(count));
+            bufferedWriter.close();
+
+            ////////////////////////////////////////////////////////////////////////////////
+
+            System.out.println(player);
             GameController.player = player;
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);

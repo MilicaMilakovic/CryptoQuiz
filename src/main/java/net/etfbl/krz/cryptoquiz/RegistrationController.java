@@ -42,12 +42,18 @@ public class RegistrationController {
 
                 // Kreira se kopija sertifikata koja ce biti dostupna korisniku na desktopu,
                 // kako korisnik ne bi pristupao direktorijumu sa sertifikatima drugih korisnika
+
                 String desktop = System.getProperty("user.home") + "/Desktop";
                 Files.copy(Paths.get(outputDir+File.separator+player.getUsername()+".cer"),Paths.get(desktop+File.separator+player.getUsername()+".cer"), StandardCopyOption.REPLACE_EXISTING);
                 certificatePath.setText(desktop+File.separator+player.getUsername()+".cer");
                 username.setText("");
                 password.setText("");
                 email.setText("");
+
+                // kreira se fajl u kome ce biti upisan broj prijava
+                BufferedWriter bw = new BufferedWriter( new FileWriter(outputDir+File.separator+"count.txt"));
+                bw.write("0");
+                bw.close();
 
             } else
             {
