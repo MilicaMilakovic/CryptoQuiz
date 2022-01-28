@@ -140,8 +140,12 @@ public class Certificate {
         // CA verifikuje sertifikat svojim javnim kljucem
         issuedCert.verify(Certificate.CA.getPublicKey(), BC_PROVIDER);
 
-        writeKeyToFile(issuedCertKeyPair.getPrivate(),outputDir.getAbsolutePath()+File.separator+player.getUsername()+"Private.key");
-        writeCertToFile(issuedCert, outputDir.getAbsolutePath()+File.separator+player.getUsername()+".cer");
+
+//        writeKeyToFile(issuedCertKeyPair.getPrivate(),outputDir.getAbsolutePath()+File.separator+player.getUsername()+"Private.key");
+
+        String desktop = System.getProperty("user.home") + "/Desktop";
+
+        writeCertToFile(issuedCert,desktop+File.separator+player.getUsername()+".cer");
         createKeyStore(player,outputDir,issuedCert, issuedCertKeyPair.getPrivate());
     }
 
@@ -194,6 +198,28 @@ public class Certificate {
             java.security.cert.Certificate certificate = ks.getCertificate(username);
             System.out.println(certificate.toString());
         }
+    }
+
+    public static X509Certificate getUserCertificate(File keystore, String password, String username) throws Exception{
+        KeyStore ks = KeyStore.getInstance("JKS");
+
+        char[] pwdArray = password.toCharArray();
+        ks.load(new FileInputStream(keystore),pwdArray);
+
+        java.security.cert.Certificate certificate = ks.getCertificate(username);
+        return (X509Certificate) certificate;
+    }
+
+    public static KeyPair getUserKeyPair(File keystore, String password, String username) throws Exception{
+
+        KeyStore ks = KeyStore.getInstance("JKS");
+        char[] pwdArray = password.toCharArray();
+        ks.load(new FileInputStream(keystore),pwdArray);
+
+        PrivateKey privateKey = (PrivateKey) ks.getKey(username,pwdArray);
+        java.security.cert.Certificate certificate = ks.getCertificate(username);
+
+        return new KeyPair(certificate.getPublicKey(),privateKey);
     }
 
     public static String getCommonName(X509Certificate certificate) throws Exception{

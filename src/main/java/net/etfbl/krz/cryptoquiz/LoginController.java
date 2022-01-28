@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.etfbl.krz.cryptography.CACertificate;
@@ -17,10 +18,12 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.*;
 import java.net.URL;
+import java.security.KeyPair;
 import java.security.Security;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateKey;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import static net.etfbl.krz.cryptography.Certificate.getIssuerCertificate;
@@ -31,14 +34,17 @@ public class LoginController implements Initializable {
     @FXML
     public PasswordField passwordField;
     @FXML
+    public TextField username;
+    @FXML
     Label certPath;
+
+    private String user="";
 
     public void login(){
         Security.addProvider(new BouncyCastleProvider());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("game-view.fxml"));
         try{
-
             // procitaj potrebne podatke iz ucitanog sertifikata
             X509Certificate certificate = Certificate.loadUserCertificate(new FileInputStream(new File(certPath.getText())));
             String issuer = certificate.getIssuerDN().getName().replace("CN=","");
@@ -50,22 +56,38 @@ public class LoginController implements Initializable {
             player.setEmail(Certificate.getEmail(certificate));
             player.setPassword(passwordField.getText());
 
-            // ucitaj sertifikat ca tijela koje je izdalo sert
-           X509Certificate issuerCert;
+            if(!username.getText().equals(user)){
+                throw new Exception("Ime u sertifikatu i uneseno ime se ne poklapaju!");
+            }
+
+            // ucitaj sertifikat CA tijela koje ga je izdalo
+            X509Certificate issuerCert;
             if(issuer.equals("CA_TIJELO1")){
                 issuerCert = getIssuerCertificate(1);
             } else {
                 issuerCert = getIssuerCertificate(2);
             }
 
-            // verifikuj uneseni sertifikat
+            // provjeri da je sertifikat izdalo ca tijelo
             certificate.verify(issuerCert.getPublicKey(), Certificate.BC_PROVIDER);
+
+            // provjeri da li je sertifikat istekao
+            if(certificate.getNotAfter().compareTo(new Date()) != 1) throw new Exception("Sertifikat je istekao.");
+
+
+            // TO DO: provjeri da li je sertifikat povucen
+
             System.out.println("Sertifikat verifikovan!");
+
 
             // azuriraj broj prijava
 
             String hash = SecurityUtil.hashFunction(player.getUsername());
-            hash = hash.replace("/","%2F");
+
+            KeyPair keyPair= Certificate.getUserKeyPair(new File(Main.playersDir+File.separator+ hash+File.separator+player.getUsername()+".jks"),
+                    player.getPassword(),player.getUsername());
+
+            
             File countFile= new File(Main.playersDir+File.separator+ hash+File.separator+"count.txt");
 
             BufferedReader br = new BufferedReader(new FileReader(countFile));
@@ -94,7 +116,6 @@ public class LoginController implements Initializable {
         }
         catch (Exception e){
             System.out.println("Sertifikat nevazeci!" + e.getMessage());
-//            e.printStackTrace();
         }
     }
 
@@ -127,14 +148,22 @@ public class LoginController implements Initializable {
             try{
                 FileInputStream fileInputStream = new FileInputStream(cert);
                 X509Certificate userCertificate = Certificate.loadUserCertificate(fileInputStream);
-                String user = Certificate.getCommonName(userCertificate);
-                System.out.println("This certificate belongs to:" + user);
+                user = Certificate.getCommonName(userCertificate);
+                System.out.println("Sertifikat pripada korisniku:" + user);
             } catch (Exception e){
                 e.printStackTrace();
             }
             loginBtn.setDisable(false);
         }
     }
+
+    private void updateCount(){
+        // uzmi korisnikov kljuc iz keystorea
+        // dekriptuj fajl privatnim kljucem korisnika
+        // nova vrijednost koja ce se upisati
+        // enkriptuj fajl opet javnim kljucem korisnika
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginBtn.setDisable(true);

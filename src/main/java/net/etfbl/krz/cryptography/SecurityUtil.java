@@ -1,5 +1,6 @@
 package net.etfbl.krz.cryptography;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Base64;
@@ -14,7 +15,7 @@ public class SecurityUtil {
 
             text = messageDigest.digest(text);
             hash = Base64.getEncoder().encodeToString(text);
-
+            hash = hash.replace("/","%2F");
 
         } catch (Exception e){
             e.printStackTrace();
@@ -22,10 +23,16 @@ public class SecurityUtil {
         return hash;
     }
 
-    public static boolean createKeystore(String user, String password){
-
-
-        return true;
+    public static void asymmetricEncription(File file, String message){
 
     }
+
+    public static void asymmetricDecription(File file){
+
+    }
+
+
+
+
+
 }

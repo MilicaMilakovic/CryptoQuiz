@@ -34,7 +34,6 @@ public class RegistrationController {
         try {
             if(usernameAvailable(player.getUsername())){
                 String hash = SecurityUtil.hashFunction(player.getUsername());
-                hash = hash.replace("/","%2F");
 
                 new File(Main.playersDir+File.separator+hash).mkdir();
                 File outputDir= new File(Main.playersDir+File.separator+ hash+File.separator);
@@ -44,7 +43,8 @@ public class RegistrationController {
                 // kako korisnik ne bi pristupao direktorijumu sa sertifikatima drugih korisnika
 
                 String desktop = System.getProperty("user.home") + "/Desktop";
-                Files.copy(Paths.get(outputDir+File.separator+player.getUsername()+".cer"),Paths.get(desktop+File.separator+player.getUsername()+".cer"), StandardCopyOption.REPLACE_EXISTING);
+//                Files.copy(Paths.get(outputDir+File.separator+player.getUsername()+".cer"),Paths.get(desktop+File.separator+player.getUsername()+".cer"), StandardCopyOption.REPLACE_EXISTING);
+
                 certificatePath.setText(desktop+File.separator+player.getUsername()+".cer");
                 username.setText("");
                 password.setText("");
@@ -68,8 +68,6 @@ public class RegistrationController {
 
     private boolean usernameAvailable(String username){
         String hash = SecurityUtil.hashFunction(username);
-
-        hash = hash.replace("/","%2F");
         System.out.println(username+"=" + hash);
 
         List<String> players;

@@ -5,6 +5,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="446.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.etfbl.krz.cryptoquiz.LoginController">
+<Pane prefHeight="446.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="net.etfbl.krz.cryptoquiz.LoginController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6e3f7" height="446.0" stroke="BLACK" strokeType="INSIDE" width="343.0">
          <effect>
@@ -40,17 +41,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <ImageView fitHeight="80.0" fitWidth="74.0" layoutX="135.0" layoutY="73.0" opacity="0.63" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="74.0" layoutX="128.0" layoutY="40.0" opacity="0.63" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/certificate.png" />
          </image>
       </ImageView>
-      <Label layoutX="115.0" layoutY="140.0" prefHeight="70.0" prefWidth="115.0" text="Učitajte svoj digitalni sertifikat" textAlignment="CENTER" textFill="#150404" wrapText="true">
+      <Label layoutX="115.0" layoutY="110.0" prefHeight="53.0" prefWidth="115.0" text="Učitajte svoj digitalni sertifikat" textAlignment="CENTER" textFill="#150404" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" graphicTextGap="15.0" layoutX="95.0" layoutY="250.0" onAction="#uploadCertificate" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: #FFE5C0; -fx-border-radius: 0; -fx-background-radius: 0; -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1.5;" text="UČITAJ" textFill="#151a6a">
+      <JFXButton buttonType="RAISED" graphicTextGap="15.0" layoutX="95.0" layoutY="200.0" onAction="#uploadCertificate" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: #FFE5C0; -fx-border-radius: 0; -fx-background-radius: 0; -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1.5;" text="UČITAJ" textFill="#151a6a">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -61,7 +62,7 @@
             <FontAwesomeIconView fill="#151a6a" glyphName="UPLOAD" />
          </graphic>
       </JFXButton>
-      <Label layoutX="128.0" layoutY="23.0" text="PRIJAVA">
+      <Label layoutX="128.0" layoutY="10.0" text="PRIJAVA">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -89,7 +90,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <Label fx:id="certPath" layoutX="50.0" layoutY="204.0" prefHeight="39.0" prefWidth="246.0" text="Putanja do ucitanog sertifikata...." textAlignment="JUSTIFY" textFill="#2d007f" wrapText="true">
+      <Label fx:id="certPath" layoutX="50.0" layoutY="155.0" prefHeight="39.0" prefWidth="246.0" text="Putanja do ucitanog sertifikata...." textAlignment="JUSTIFY" textFill="#2d007f" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -99,5 +100,6 @@
             <Font size="13.0" />
          </font>
       </PasswordField>
+      <TextField fx:id="username" layoutX="95.0" layoutY="250.0" prefHeight="39.0" prefWidth="155.0" promptText="username" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
    </children>
 </Pane>
