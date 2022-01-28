@@ -22,5 +22,10 @@ public class SecurityUtil {
         return hash;
     }
 
+    public static boolean createKeystore(String user, String password){
 
+
+        return true;
+
+    }
 }

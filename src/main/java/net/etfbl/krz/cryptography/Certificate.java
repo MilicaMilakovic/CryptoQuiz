@@ -140,12 +140,11 @@ public class Certificate {
         // CA verifikuje sertifikat svojim javnim kljucem
         issuedCert.verify(Certificate.CA.getPublicKey(), BC_PROVIDER);
 
-//        System.out.println("Private Key:");
-//        System.out.println(issuedCertKeyPair.getPrivate().toString());
-        writeKeyToFile(issuedCertKeyPair.getPrivate(),outputDir.getAbsolutePath()+File.separator+player.getUsername()+"Private.key");
-        writeCertToFile(issuedCert, outputDir.getAbsolutePath()+File.separator+player.getUsername()+".cer");
-
+//        writeKeyToFile(issuedCertKeyPair.getPrivate(),outputDir.getAbsolutePath()+File.separator+player.getUsername()+"Private.key");
+//        writeCertToFile(issuedCert, outputDir.getAbsolutePath()+File.separator+player.getUsername()+".cer");
+        createKeyStore(player,outputDir,issuedCert, issuedCertKeyPair.getPrivate());
     }
+
     static void writeCertToFile(X509Certificate certificate, String fileName) throws Exception {
         FileOutputStream certificateOut = new FileOutputStream(new File(fileName));
         certificateOut.write("-----BEGIN CERTIFICATE-----\n".getBytes());
@@ -156,18 +155,45 @@ public class Certificate {
 
     public static void writeKeyToFile(PrivateKey key,String filename) throws Exception{
 
-//        PemObject pemObject = new PemObject("RSA PRIVATE KEY",key.getEncoded());
-//        PemWriter writer = new PemWriter(new FileWriter(new File(filename)));
-//        writer.writeObject(pemObject.generate());
-
         String str = "-----BEGIN PRIVATE KEY-----\n";
         str+= java.util.Base64.getEncoder().encodeToString(key.getEncoded());
         str+="\n-----END PRIVATE KEY-----\n";
 
-//        System.out.println(str);
         FileOutputStream fis = new FileOutputStream(new File(filename));
         fis.write(str.getBytes(StandardCharsets.UTF_8));
         fis.close();
+    }
+
+    public static void createKeyStore(Player player, File outputDir, X509Certificate issuedCertificate, PrivateKey privateKey) throws Exception{
+        KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
+        System.out.println("Create Key Store");
+
+        char[] pwdArray = player.getPassword().toCharArray();
+        ks.load(null,pwdArray);
+        ks.setKeyEntry(player.getUsername(),privateKey,pwdArray,new java.security.cert.Certificate[]{issuedCertificate});
+
+        FileOutputStream fos = new FileOutputStream(outputDir.getAbsolutePath()+File.separator+player.getUsername()+".jks");
+        ks.store(fos,pwdArray);
+
+        System.out.println("Keystore created");
+//        readKeyStore(new File(outputDir.getAbsolutePath()+File.separator+player.getUsername()+".jks"),player.getPassword(),player.getUsername());
+
+    }
+
+    public static void readKeyStore(File file,String password,String username) throws Exception {
+        KeyStore ks = KeyStore.getInstance("JKS");
+
+        System.out.println("Read keystore:");
+        char[] pwdArray = password.toCharArray();
+        ks.load(new FileInputStream(file),pwdArray);
+
+        if(ks.containsAlias(username)){
+            Key key = ks.getKey(username,pwdArray);
+            System.out.println(key.toString());
+
+            java.security.cert.Certificate certificate = ks.getCertificate(username);
+            System.out.println(certificate.toString());
+        }
     }
 
     public static String getCommonName(X509Certificate certificate) throws Exception{
