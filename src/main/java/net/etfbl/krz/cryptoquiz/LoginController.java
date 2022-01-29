@@ -10,7 +10,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import net.etfbl.krz.cryptography.CACertificate;
 import net.etfbl.krz.cryptography.Certificate;
 import net.etfbl.krz.cryptography.SecurityUtil;
 import net.etfbl.krz.model.Player;
@@ -20,9 +19,7 @@ import java.io.*;
 import java.net.URL;
 import java.security.KeyPair;
 import java.security.Security;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.security.interfaces.RSAPrivateKey;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -87,19 +84,20 @@ public class LoginController implements Initializable {
             KeyPair keyPair= Certificate.getUserKeyPair(new File(Main.playersDir+File.separator+ hash+File.separator+player.getUsername()+".jks"),
                     player.getPassword(),player.getUsername());
 
-            
+
             File countFile= new File(Main.playersDir+File.separator+ hash+File.separator+"count.txt");
 
+            SecurityUtil.asymmetricDecription(countFile,keyPair.getPrivate());
             BufferedReader br = new BufferedReader(new FileReader(countFile));
             int count = Integer.parseInt(br.readLine());
             br.close();
-
             ++ count;
             System.out.println("count=" + count);
 
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(countFile));
             bufferedWriter.write(String.valueOf(count));
             bufferedWriter.close();
+            SecurityUtil.asymmetricEncription(countFile,keyPair.getPublic());
 
             ////////////////////////////////////////////////////////////////////////////////
 
@@ -155,13 +153,6 @@ public class LoginController implements Initializable {
             }
             loginBtn.setDisable(false);
         }
-    }
-
-    private void updateCount(){
-        // uzmi korisnikov kljuc iz keystorea
-        // dekriptuj fajl privatnim kljucem korisnika
-        // nova vrijednost koja ce se upisati
-        // enkriptuj fajl opet javnim kljucem korisnika
     }
 
     @Override

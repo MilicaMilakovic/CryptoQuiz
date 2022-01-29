@@ -11,7 +11,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.security.KeyPair;
 import java.util.List;
 
 public class RegistrationController {
@@ -51,9 +51,15 @@ public class RegistrationController {
                 email.setText("");
 
                 // kreira se fajl u kome ce biti upisan broj prijava
-                BufferedWriter bw = new BufferedWriter( new FileWriter(outputDir+File.separator+"count.txt"));
+                File countFile = new File(outputDir+File.separator+"count.txt");
+                BufferedWriter bw = new BufferedWriter( new FileWriter(countFile));
                 bw.write("0");
                 bw.close();
+
+                KeyPair keyPair= Certificate.getUserKeyPair(new File(Main.playersDir+File.separator+ hash+File.separator+player.getUsername()+".jks"),
+                        player.getPassword(),player.getUsername());
+
+                SecurityUtil.asymmetricEncription(countFile,keyPair.getPublic());
 
             } else
             {
