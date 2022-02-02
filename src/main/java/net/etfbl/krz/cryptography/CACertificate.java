@@ -17,6 +17,15 @@ public class CACertificate {
     private RSAPrivateKey privateKey;
     private int id;
 
+    public CACertificate(X509Certificate certificate, RSAPrivateKey privateKey, int id){
+        this.certificate = certificate;
+        this.privateKey = privateKey;
+        this.id = id;
+    }
+
+    public CACertificate(){
+
+    }
     public CACertificate(FileInputStream certificate, File privateKey,int id) {
        try{
            // Ucitaj sertifikat CA tijela
@@ -38,6 +47,7 @@ public class CACertificate {
            e.printStackTrace();
        }
     }
+
 
     public X509Certificate getCertificate() {
         return certificate;

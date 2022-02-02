@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.etfbl.krz.cryptography.CACertificate;
 import net.etfbl.krz.cryptography.Certificate;
+import net.etfbl.krz.cryptography.SecurityUtil;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -17,6 +19,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
@@ -63,12 +66,9 @@ public class Main extends Application {
         System.out.println("------");
         System.out.println(s);
 
-
-
-//        System.out.println("Private Key:");
-//        System.out.println(Certificate.caKey);
-//        System.out.println("-------");
-//        System.out.println(Certificate.CA.getPublicKey());
+        ////// kriptovanje fajla sa rezultatima na pocetku, kad je prazan
+//        KeyPair keyPair = Certificate.getUserKeyPair(new File("src/main/resources/ca/root.jks"),"sigurnost","root");
+//        SecurityUtil.asymmetricEncryption(resultsFile,keyPair.getPublic());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 522);

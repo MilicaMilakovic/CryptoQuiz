@@ -33,6 +33,8 @@ public class GameController implements Initializable {
     @FXML
     public Button resultsButton;
     @FXML
+    public Button endGameButton;
+    @FXML
     public Label timer;
 
     @FXML
@@ -219,6 +221,7 @@ public class GameController implements Initializable {
 
     public void showResults(){
         Parent root = null;
+        endGameButton.setVisible(true);
         resultsButton.setVisible(false);
         try{
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("results-view.fxml")));
@@ -227,5 +230,9 @@ public class GameController implements Initializable {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void exit(){
+        System.exit(0);
     }
 }

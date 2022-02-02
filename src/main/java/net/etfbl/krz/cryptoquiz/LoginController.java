@@ -105,7 +105,7 @@ public class LoginController implements Initializable {
             GameController.player = player;
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-            stage.setTitle("Login");
+            stage.setTitle("Quiz");
             stage.setScene(scene);
             stage.show();
 
@@ -114,6 +114,7 @@ public class LoginController implements Initializable {
         }
         catch (Exception e){
             System.out.println("Sertifikat nevazeci!" + e.getMessage());
+//            e.printStackTrace();
         }
     }
 

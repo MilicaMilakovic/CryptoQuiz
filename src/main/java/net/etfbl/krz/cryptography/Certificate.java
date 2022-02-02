@@ -59,19 +59,35 @@ public class Certificate {
 
     static  {
         try{
-           CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
 
-            FileInputStream inStream = new FileInputStream(caDir+"ca1.crt");
-            File keyReader = new File(privDir+"ca1_pkcs8.key");
+            CACertificate ca1 = getCACertificate(new File("src/main/resources/ca/ca1.jks"),"sigurnost","ca1");
+            ca1.setId(1);
+            CACertificate ca2 = getCACertificate(new File("src/main/resources/ca/ca2.jks"),"sigurnost","ca2");
+            ca2.setId(2);
 
-            ca.add(new CACertificate(inStream,keyReader,1));
+            ca.add(ca1);
+            ca.add(ca2);
 
-            inStream = new FileInputStream(caDir+"ca2.crt");
-            keyReader = new File(privDir+"ca2_pkcs8.key");
-            ca.add(new CACertificate(inStream,keyReader,2));
 
-           System.out.println("CA Tijela ucitana! " );
-           inStream.close();
+//            ** Koristeno prilikom generisanja keystorea
+
+//            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+//            FileInputStream inStream = new FileInputStream(caDir+"ca1.crt");
+//            File keyReader = new File(privDir+"ca1_pkcs8.key");
+//            CACertificate ca1 = new CACertificate(inStream,keyReader,1);
+//            ca.add(ca1);
+//
+//            createKeyStore("ca1","sigurnost",new File("src/main/resources/ca"),ca1.getCertificate(),ca1.getPrivateKey());
+//
+//            inStream = new FileInputStream(caDir+"ca2.crt");
+//            keyReader = new File(privDir+"ca2_pkcs8.key");
+//            CACertificate ca2 = new CACertificate(inStream,keyReader,2);
+//            createKeyStore("ca2","sigurnost",new File("src/main/resources/ca"),ca2.getCertificate(),ca2.getPrivateKey());
+//
+//            ca.add(ca2);
+//           inStream.close();
+
+            System.out.println("CA Tijela ucitana! " );
 
         } catch (Exception e){
             e.printStackTrace();
@@ -146,7 +162,7 @@ public class Certificate {
         String desktop = System.getProperty("user.home") + "/Desktop";
 
         writeCertToFile(issuedCert,desktop+File.separator+player.getUsername()+".cer");
-        createKeyStore(player,outputDir,issuedCert, issuedCertKeyPair.getPrivate());
+        createKeyStore(player.getUsername(),player.getPassword(),outputDir,issuedCert, issuedCertKeyPair.getPrivate());
     }
 
     static void writeCertToFile(X509Certificate certificate, String fileName) throws Exception {
@@ -168,15 +184,15 @@ public class Certificate {
         fis.close();
     }
 
-    public static void createKeyStore(Player player, File outputDir, X509Certificate issuedCertificate, PrivateKey privateKey) throws Exception{
+    public static void createKeyStore(String alias, String password, File outputDir, X509Certificate issuedCertificate, PrivateKey privateKey) throws Exception{
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
         System.out.println("Create Key Store");
 
-        char[] pwdArray = player.getPassword().toCharArray();
+        char[] pwdArray = password.toCharArray();
         ks.load(null,pwdArray);
-        ks.setKeyEntry(player.getUsername(),privateKey,pwdArray,new java.security.cert.Certificate[]{issuedCertificate});
+        ks.setKeyEntry(alias,privateKey,pwdArray,new java.security.cert.Certificate[]{issuedCertificate});
 
-        FileOutputStream fos = new FileOutputStream(outputDir.getAbsolutePath()+File.separator+player.getUsername()+".jks");
+        FileOutputStream fos = new FileOutputStream(outputDir.getAbsolutePath()+File.separator+alias+".jks");
         ks.store(fos,pwdArray);
 
         System.out.println("Keystore created");
@@ -184,20 +200,25 @@ public class Certificate {
 
     }
 
-    public static void readKeyStore(File file,String password,String username) throws Exception {
+    // za citanje ca tijela iz keystorea
+    public static CACertificate getCACertificate(File file,String password,String username) throws Exception {
         KeyStore ks = KeyStore.getInstance("JKS");
 
         System.out.println("Read keystore:");
         char[] pwdArray = password.toCharArray();
         ks.load(new FileInputStream(file),pwdArray);
 
+        CACertificate ca = new CACertificate();
+
         if(ks.containsAlias(username)){
             Key key = ks.getKey(username,pwdArray);
-            System.out.println(key.toString());
+            ca.setPrivateKey((RSAPrivateKey) key);
 
             java.security.cert.Certificate certificate = ks.getCertificate(username);
-            System.out.println(certificate.toString());
+            ca.setCertificate((X509Certificate) certificate);
         }
+
+        return  ca;
     }
 
     public static X509Certificate getUserCertificate(File keystore, String password, String username) throws Exception{
