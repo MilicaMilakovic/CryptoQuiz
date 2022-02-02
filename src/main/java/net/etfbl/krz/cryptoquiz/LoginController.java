@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
 
             File countFile= new File(Main.playersDir+File.separator+ hash+File.separator+"count.txt");
 
-            SecurityUtil.asymmetricDecription(countFile,keyPair.getPrivate());
+            SecurityUtil.asymmetricDecryption(countFile,keyPair.getPrivate());
             BufferedReader br = new BufferedReader(new FileReader(countFile));
             int count = Integer.parseInt(br.readLine());
             br.close();
@@ -97,7 +97,7 @@ public class LoginController implements Initializable {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(countFile));
             bufferedWriter.write(String.valueOf(count));
             bufferedWriter.close();
-            SecurityUtil.asymmetricEncription(countFile,keyPair.getPublic());
+            SecurityUtil.asymmetricEncryption(countFile,keyPair.getPublic());
 
             ////////////////////////////////////////////////////////////////////////////////
 

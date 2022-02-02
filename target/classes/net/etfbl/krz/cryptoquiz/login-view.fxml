@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="446.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="net.etfbl.krz.cryptoquiz.LoginController">
+<Pane prefHeight="446.0" prefWidth="343.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="net.etfbl.krz.cryptoquiz.LoginController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6e3f7" height="446.0" stroke="BLACK" strokeType="INSIDE" width="343.0">
          <effect>
@@ -28,19 +28,6 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="94.0" layoutY="350.0" onAction="#login" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: linear-gradient(to top,#353F9C, #6290db); -fx-border-radius: 0; -fx-background-radius: 0;" text="PRIJAVI SE" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton layoutX="128.0" layoutY="400.0" onAction="#addQuestion" text="Dodaj pitanje">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
       <ImageView fitHeight="80.0" fitWidth="74.0" layoutX="128.0" layoutY="40.0" opacity="0.63" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/certificate.png" />
@@ -95,11 +82,24 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <TextField fx:id="username" layoutX="95.0" layoutY="250.0" prefHeight="39.0" prefWidth="155.0" promptText="username" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
       <PasswordField fx:id="passwordField" layoutX="95.0" layoutY="300.0" prefHeight="39.0" prefWidth="155.0" promptText="lozinka" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;">
          <font>
             <Font size="13.0" />
          </font>
       </PasswordField>
-      <TextField fx:id="username" layoutX="95.0" layoutY="250.0" prefHeight="39.0" prefWidth="155.0" promptText="username" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
+      <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="94.0" layoutY="350.0" onAction="#login" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: linear-gradient(to top,#353F9C, #6290db); -fx-border-radius: 0; -fx-background-radius: 0;" text="PRIJAVI SE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="128.0" layoutY="400.0" onAction="#addQuestion" text="Dodaj pitanje">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </Pane>

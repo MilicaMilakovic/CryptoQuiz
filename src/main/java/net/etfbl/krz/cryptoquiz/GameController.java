@@ -216,4 +216,16 @@ public class GameController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void showResults(){
+        Parent root = null;
+        resultsButton.setVisible(false);
+        try{
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("results-view.fxml")));
+            questionPane.getChildren().removeAll();
+            questionPane.getChildren().setAll(root);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

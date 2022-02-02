@@ -59,7 +59,7 @@ public class RegistrationController {
                 KeyPair keyPair= Certificate.getUserKeyPair(new File(Main.playersDir+File.separator+ hash+File.separator+player.getUsername()+".jks"),
                         player.getPassword(),player.getUsername());
 
-                SecurityUtil.asymmetricEncription(countFile,keyPair.getPublic());
+                SecurityUtil.asymmetricEncryption(countFile,keyPair.getPublic());
 
             } else
             {

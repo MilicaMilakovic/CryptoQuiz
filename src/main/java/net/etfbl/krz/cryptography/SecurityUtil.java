@@ -28,7 +28,7 @@ public class SecurityUtil {
         return hash;
     }
 
-    public static void asymmetricEncription(File file, PublicKey key) throws Exception{
+    public static void asymmetricEncryption(File file, PublicKey key) throws Exception{
         byte[] fileBytes = Files.readAllBytes(file.toPath());
 
         Cipher cipher = Cipher.getInstance("RSA");
@@ -40,7 +40,7 @@ public class SecurityUtil {
         fileOutputStream.close();
     }
 
-    public static void asymmetricDecription(File file, PrivateKey key) throws Exception{
+    public static void asymmetricDecryption(File file, PrivateKey key) throws Exception{
         byte[] encrypted = Files.readAllBytes(file.toPath());
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE,key);
