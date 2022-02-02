@@ -25,15 +25,13 @@ public class ResultsController implements Initializable {
         try{
             KeyPair keyPair = Certificate.getUserKeyPair(new File("src/main/resources/ca/root.jks"),"sigurnost","root");
             SecurityUtil.asymmetricDecryption(resultsFile,keyPair.getPrivate());
-            String res = "";
+            StringBuilder res = new StringBuilder();
 
             List<String> lines = Files.readAllLines(resultsFile.toPath());
             for (String line: lines) {
-                String l ="\t\t\t" + line.replace(" # ","\t\t\t");
-                System.out.println(l);
-                res+= l+"\n";
+                res.append("\t\t\t").append(line.replace(" # ", "\t\t\t")).append("\n");
             }
-            textArea.setText(res);
+            textArea.setText(res.toString());
 
             SecurityUtil.asymmetricEncryption(resultsFile,keyPair.getPublic());
 
