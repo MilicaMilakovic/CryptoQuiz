@@ -1,5 +1,6 @@
 package net.etfbl.krz.cryptography;
 
+import net.etfbl.krz.cryptoquiz.Main;
 import net.etfbl.krz.model.Player;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.asn1.x500.RDN;
@@ -7,12 +8,16 @@ import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.asn1.x500.style.IETFUtils;
 import org.bouncycastle.asn1.x509.*;
+import org.bouncycastle.cert.X509CRLHolder;
 import org.bouncycastle.cert.X509CertificateHolder;
+import org.bouncycastle.cert.X509v2CRLBuilder;
 import org.bouncycastle.cert.X509v3CertificateBuilder;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils;
+import org.bouncycastle.jcajce.provider.asymmetric.X509;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.jce.provider.X509CRLParser;
 import org.bouncycastle.openssl.PKCS8Generator;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
@@ -28,6 +33,8 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.cert.CertificateFactory;
+import java.security.cert.X509CRL;
+import java.security.cert.X509CRLEntry;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -270,4 +277,48 @@ public class Certificate {
         }
         return null;
     }
+
+    public static void revokeCertificate(X509Certificate revokedCert , String list) throws Exception{
+
+        X509CRLParser crlParser = new X509CRLParser();
+        crlParser.engineInit(new FileInputStream(Main.caDir+list));
+        X509CRL crl = (X509CRL) crlParser.engineRead();
+
+        X500Name rootCertIssuer = new JcaX509CertificateHolder(Certificate.CA).getSubject();
+        X509v2CRLBuilder crlBuilder = new X509v2CRLBuilder(rootCertIssuer,new Date());
+        crlBuilder.addCRLEntry(revokedCert.getSerialNumber(), new Date(), CRLReason.CESSATION_OF_OPERATION);
+
+        crlBuilder.addCRL(new X509CRLHolder(crl.getEncoded()));
+
+        JcaContentSignerBuilder csrBuilder = new JcaContentSignerBuilder(SIGNATURE_ALGORITHM).setProvider(BC_PROVIDER);
+        ContentSigner contentSigner = csrBuilder.build(Certificate.caKey);
+
+        X509CRLHolder c = crlBuilder.build(contentSigner);
+
+        String str = "-----BEGIN X509 CRL-----\n";
+        str+= java.util.Base64.getEncoder().encodeToString(c.getEncoded());
+        str+="\n-----END X509 CRL-----\n";
+
+        FileOutputStream fis = new FileOutputStream(new File(Main.caDir+list));
+        fis.write(str.getBytes(StandardCharsets.UTF_8));
+        fis.close();
+
+    }
+
+    public static boolean checkCRL(String list , X509Certificate certificate){
+        System.out.println("Provjerava se lista: " + list);
+        try (InputStream inStream = new FileInputStream(Main.caDir+File.separator+list)) {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            X509CRL crl = (X509CRL)cf.generateCRL(inStream);
+
+            X509CRLEntry revokedCertificate = crl.getRevokedCertificate(certificate.getSerialNumber());
+            if(revokedCertificate!=null)
+                return true;
+        } catch (Exception e ){
+            e.printStackTrace();
+            return  false;
+        }
+        return  false;
+    }
+
 }

@@ -30,6 +30,7 @@ public class Main extends Application {
     public static final File file = new File("src/main/resources/images");
     public static final File resultsFile = new File("src/main/resources/results.txt");
     public static final String resources = file.getAbsolutePath();
+    public static final String caDir = "src/main/resources/ca/";
     public static final  String questionsDir = (new File("src/main/resources/questions")).getAbsolutePath();
     public static final String playersDir = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=")).getAbsolutePath();
     public static final String playersList = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=/c1zxZl0P029IZeS8dDmr42lXLgQ=.txt")).getAbsolutePath();

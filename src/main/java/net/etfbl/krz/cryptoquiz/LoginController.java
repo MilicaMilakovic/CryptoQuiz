@@ -23,7 +23,7 @@ import java.security.cert.X509Certificate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import static net.etfbl.krz.cryptography.Certificate.getIssuerCertificate;
+import static net.etfbl.krz.cryptography.Certificate.*;
 
 public class LoginController implements Initializable {
     @FXML
@@ -36,6 +36,7 @@ public class LoginController implements Initializable {
     Label certPath;
 
     private String user="";
+    int id =0;
 
     public void login(){
         Security.addProvider(new BouncyCastleProvider());
@@ -61,21 +62,21 @@ public class LoginController implements Initializable {
             X509Certificate issuerCert;
             if(issuer.equals("CA_TIJELO1")){
                 issuerCert = getIssuerCertificate(1);
+                id=1;
             } else {
                 issuerCert = getIssuerCertificate(2);
+                id=2;
             }
 
             // provjeri da je sertifikat izdalo ca tijelo
             certificate.verify(issuerCert.getPublicKey(), Certificate.BC_PROVIDER);
 
             // provjeri da li je sertifikat istekao
-            if(certificate.getNotAfter().compareTo(new Date()) != 1) throw new Exception("Sertifikat je istekao.");
-
+            certificate.checkValidity();
 
             // TO DO: provjeri da li je sertifikat povucen
-
-            System.out.println("Sertifikat verifikovan!");
-
+            if(checkCRL("list"+id+".crl",certificate))
+                throw new Exception("Sertifikat je povucen!");
 
             // azuriraj broj prijava
 
@@ -99,7 +100,11 @@ public class LoginController implements Initializable {
             bufferedWriter.close();
             SecurityUtil.asymmetricEncryption(countFile,keyPair.getPublic());
 
+            if(count>3)
+                revokeCertificate(certificate,"list"+id+".crl");
+
             ////////////////////////////////////////////////////////////////////////////////
+            System.out.println("Sertifikat verifikovan!");
 
             System.out.println(player);
             GameController.player = player;
