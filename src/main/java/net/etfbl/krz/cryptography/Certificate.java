@@ -153,7 +153,7 @@ public class Certificate {
         issuedCertBuilder.addExtension(Extension.basicConstraints, true, new BasicConstraints(false)); // nije CA sertifikat
         issuedCertBuilder.addExtension(Extension.authorityKeyIdentifier, false, issuedCertExtUtils.createAuthorityKeyIdentifier(Certificate.CA));
         issuedCertBuilder.addExtension(Extension.subjectKeyIdentifier, false, issuedCertExtUtils.createSubjectKeyIdentifier(csr.getSubjectPublicKeyInfo()));
-        issuedCertBuilder.addExtension(Extension.keyUsage, false, new KeyUsage(KeyUsage.keyEncipherment));
+        issuedCertBuilder.addExtension(Extension.keyUsage, false, new KeyUsage(KeyUsage.digitalSignature));
         issuedCertBuilder.addExtension(Extension.extendedKeyUsage, false, new ExtendedKeyUsage(KeyPurposeId.id_kp_clientAuth));
 
         // izdavanje sertifikata
@@ -203,11 +203,9 @@ public class Certificate {
         ks.store(fos,pwdArray);
 
         System.out.println("Keystore created");
-//        readKeyStore(new File(outputDir.getAbsolutePath()+File.separator+player.getUsername()+".jks"),player.getPassword(),player.getUsername());
-
     }
 
-    // za citanje ca tijela iz keystorea
+    // za citanje CA tijela iz keystore-a
     public static CACertificate getCACertificate(File file,String password,String username) throws Exception {
         KeyStore ks = KeyStore.getInstance("JKS");
 
@@ -267,31 +265,34 @@ public class Certificate {
         return  (X509Certificate)certificateFactory.generateCertificate(fis);
     }
 
-    public static X509Certificate getIssuerCertificate(int id){
-        for (CACertificate cert : ca)
-        {
-            if(cert.getId()==id)
-            {
-               return cert.getCertificate();
+    public static CACertificate getIssuerCertificate(int id){
+        for (CACertificate cert : ca){
+            if(cert.getId()==id) {
+               return cert;
             }
         }
         return null;
     }
 
-    public static void revokeCertificate(X509Certificate revokedCert , String list) throws Exception{
+    public static void revokeCertificate(X509Certificate revokedCert , String list,CACertificate issuerCertificate) throws Exception{
 
         X509CRLParser crlParser = new X509CRLParser();
         crlParser.engineInit(new FileInputStream(Main.caDir+list));
         X509CRL crl = (X509CRL) crlParser.engineRead();
 
-        X500Name rootCertIssuer = new JcaX509CertificateHolder(Certificate.CA).getSubject();
+        X500Name rootCertIssuer = new JcaX509CertificateHolder(issuerCertificate.getCertificate()).getSubject();
         X509v2CRLBuilder crlBuilder = new X509v2CRLBuilder(rootCertIssuer,new Date());
         crlBuilder.addCRLEntry(revokedCert.getSerialNumber(), new Date(), CRLReason.CESSATION_OF_OPERATION);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 1);
+        Date endDate = calendar.getTime();
+        crlBuilder.setNextUpdate(endDate);
 
         crlBuilder.addCRL(new X509CRLHolder(crl.getEncoded()));
 
         JcaContentSignerBuilder csrBuilder = new JcaContentSignerBuilder(SIGNATURE_ALGORITHM).setProvider(BC_PROVIDER);
-        ContentSigner contentSigner = csrBuilder.build(Certificate.caKey);
+        ContentSigner contentSigner = csrBuilder.build(issuerCertificate.getPrivateKey());
 
         X509CRLHolder c = crlBuilder.build(contentSigner);
 
@@ -302,7 +303,6 @@ public class Certificate {
         FileOutputStream fis = new FileOutputStream(new File(Main.caDir+list));
         fis.write(str.getBytes(StandardCharsets.UTF_8));
         fis.close();
-
     }
 
     public static boolean checkCRL(String list , X509Certificate certificate){

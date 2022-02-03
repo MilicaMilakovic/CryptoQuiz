@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.etfbl.krz.cryptography.CACertificate;
 import net.etfbl.krz.cryptography.Certificate;
 import net.etfbl.krz.cryptography.SecurityUtil;
 import net.etfbl.krz.model.Player;
@@ -59,7 +60,8 @@ public class LoginController implements Initializable {
             }
 
             // ucitaj sertifikat CA tijela koje ga je izdalo
-            X509Certificate issuerCert;
+            CACertificate issuerCert;
+//            X509Certificate issuerCert;
             if(issuer.equals("CA_TIJELO1")){
                 issuerCert = getIssuerCertificate(1);
                 id=1;
@@ -69,7 +71,7 @@ public class LoginController implements Initializable {
             }
 
             // provjeri da je sertifikat izdalo ca tijelo
-            certificate.verify(issuerCert.getPublicKey(), Certificate.BC_PROVIDER);
+            certificate.verify(issuerCert.getCertificate().getPublicKey(), Certificate.BC_PROVIDER);
 
             // provjeri da li je sertifikat istekao
             certificate.checkValidity();
@@ -101,7 +103,7 @@ public class LoginController implements Initializable {
             SecurityUtil.asymmetricEncryption(countFile,keyPair.getPublic());
 
             if(count>3)
-                revokeCertificate(certificate,"list"+id+".crl");
+                revokeCertificate(certificate,"list"+id+".crl",issuerCert);
 
             ////////////////////////////////////////////////////////////////////////////////
             System.out.println("Sertifikat verifikovan!");
@@ -142,7 +144,7 @@ public class LoginController implements Initializable {
     public void uploadCertificate(){
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Photo");
+        fileChooser.setTitle("Upload certificate");
 
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Digital certificates","*.cer"));
         File cert = fileChooser.showOpenDialog(stage);
@@ -154,6 +156,7 @@ public class LoginController implements Initializable {
                 X509Certificate userCertificate = Certificate.loadUserCertificate(fileInputStream);
                 user = Certificate.getCommonName(userCertificate);
                 System.out.println("Sertifikat pripada korisniku:" + user);
+                fileInputStream.close();
             } catch (Exception e){
                 e.printStackTrace();
             }
