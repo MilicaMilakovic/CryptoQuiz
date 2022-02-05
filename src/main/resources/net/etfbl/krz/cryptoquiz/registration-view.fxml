@@ -4,6 +4,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="446.0" prefWidth="343.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="net.etfbl.krz.cryptoquiz.RegistrationController">
+<Pane prefHeight="446.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="net.etfbl.krz.cryptoquiz.RegistrationController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6e3f7" height="446.0" stroke="BLACK" strokeType="INSIDE" width="343.0">
          <effect>
@@ -35,9 +36,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TextField fx:id="username" layoutX="66.0" layoutY="89.0" prefHeight="32.0" prefWidth="216.0" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
-      <TextField fx:id="password" layoutX="66.0" layoutY="158.0" prefHeight="32.0" prefWidth="216.0" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
-      <TextField fx:id="email" layoutX="66.0" layoutY="226.0" prefHeight="32.0" prefWidth="216.0" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
+      <TextField fx:id="username" layoutX="66.0" layoutY="89.0" prefHeight="32.0" prefWidth="216.0" promptText="username" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
+      <PasswordField fx:id="password" layoutX="66.0" layoutY="158.0" prefHeight="32.0" prefWidth="216.0" promptText="lozinka" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </PasswordField>
+      <TextField fx:id="email" layoutX="66.0" layoutY="226.0" prefHeight="32.0" prefWidth="216.0" promptText="email" style="-fx-background-color: rgba(101, 122, 191, 0.2); -fx-border-color: linear-gradient(#F4A532, #FB4A4F); -fx-border-width: 1; -fx-text-fill: #2d007f;" />
       <Label layoutX="82.0" layoutY="65.0" text="Korisničko ime:" textFill="#2d007f" />
       <Label layoutX="82.0" layoutY="133.0" text="Lozinka" textFill="#2d007f" />
       <Label layoutX="82.0" layoutY="203.0" text="Email adresa" textFill="#2d007f" />

@@ -5,15 +5,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="515.0"
-      style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="net.etfbl.krz.cryptoquiz.ResultsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="515.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="net.etfbl.krz.cryptoquiz.ResultsController">
    <children>
       <JFXTextArea fx:id="textArea" editable="false" focusColor="#f4a532" layoutX="26.0" layoutY="52.0" prefHeight="219.0" prefWidth="464.0" style="-fx-text-fill: white;" unFocusColor="#f4a532">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </JFXTextArea>
-      <Label layoutX="114.0" layoutY="20.0" text="Korisnik" textFill="#f4a532">
+      <Label layoutX="109.0" layoutY="20.0" text="Korisnik" textFill="#f4a532">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

@@ -27,13 +27,14 @@ public class EndGameController implements Initializable {
         scoreLabel.setText(score+"/5");
 
         try{
-            KeyPair keyPair = Certificate.getUserKeyPair(new File("src/main/resources/ca/root.jks"),"sigurnost","root");
+            KeyPair keyPair = Certificate.getUserKeyPair(new File(Main.caDir+"root.jks"),"sigurnost","root");
             SecurityUtil.asymmetricDecryption(resultsFile,keyPair.getPrivate());
 
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resultsFile,true));
 
             String result = GameController.player.getUsername()+" # " + GameController.player.getTime() + " # "
                             + GameController.player.getResult()+"/5 \n";
+//            System.out.println(result);
             bufferedWriter.write(result);
             bufferedWriter.close();
 

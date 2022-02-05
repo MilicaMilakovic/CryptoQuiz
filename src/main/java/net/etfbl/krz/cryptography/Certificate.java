@@ -67,9 +67,9 @@ public class Certificate {
     static  {
         try{
 
-            CACertificate ca1 = getCACertificate(new File("src/main/resources/ca/ca1.jks"),"sigurnost","ca1");
+            CACertificate ca1 = getCACertificate(new File(Main.caDir+"ca1.jks"),"sigurnost","ca1");
             ca1.setId(1);
-            CACertificate ca2 = getCACertificate(new File("src/main/resources/ca/ca2.jks"),"sigurnost","ca2");
+            CACertificate ca2 = getCACertificate(new File(Main.caDir+"ca2.jks"),"sigurnost","ca2");
             ca2.setId(2);
 
             ca.add(ca1);
@@ -307,7 +307,7 @@ public class Certificate {
 
     public static boolean checkCRL(String list , X509Certificate certificate){
         System.out.println("Provjerava se lista: " + list);
-        try (InputStream inStream = new FileInputStream(Main.caDir+File.separator+list)) {
+        try (InputStream inStream = new FileInputStream(Main.caDir+list)) {
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             X509CRL crl = (X509CRL)cf.generateCRL(inStream);
 

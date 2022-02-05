@@ -3,10 +3,10 @@ package net.etfbl.krz.cryptoquiz;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import net.etfbl.krz.cryptography.CACertificate;
 import net.etfbl.krz.cryptography.Certificate;
 import net.etfbl.krz.cryptography.SecurityUtil;
 import org.bouncycastle.asn1.x500.RDN;
@@ -16,8 +16,8 @@ import org.bouncycastle.asn1.x500.style.IETFUtils;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 
 import javax.crypto.spec.SecretKeySpec;
-import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.MessageDigest;
@@ -30,8 +30,8 @@ public class Main extends Application {
     public static final File file = new File("src/main/resources/images");
     public static final File resultsFile = new File("src/main/resources/results.txt");
     public static final String resources = file.getAbsolutePath();
-    public static final String caDir = "src/main/resources/ca/";
-    public static final  String questionsDir = (new File("src/main/resources/questions")).getAbsolutePath();
+    public static final String caDir = "src/main/resources/HELHLPlaobdmCbWFs0uva1AdcT4=/";
+    public static final  String questionsDir = (new File("src/main/resources/WHi3vPOaVYtYOCLQWW4sIJewjCE=")).getAbsolutePath();
     public static final String playersDir = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=")).getAbsolutePath();
     public static final String playersList = (new File("src/main/resources/HuPTrnrah5W9DuupQx6Weu7sDRA=/c1zxZl0P029IZeS8dDmr42lXLgQ=.txt")).getAbsolutePath();
 
@@ -67,8 +67,9 @@ public class Main extends Application {
         System.out.println("------");
         System.out.println(s);
 
-        ////// kriptovanje fajla sa rezultatima na pocetku, kad je prazan
-//        KeyPair keyPair = Certificate.getUserKeyPair(new File("src/main/resources/ca/root.jks"),"sigurnost","root");
+
+        // kriptovanje fajla sa rezultatima na pocetku, kad je prazan
+//        KeyPair keyPair = Certificate.getUserKeyPair(new File(caDir+"root.jks"),"sigurnost","root");
 //        SecurityUtil.asymmetricEncryption(resultsFile,keyPair.getPublic());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-screen.fxml"));
@@ -76,6 +77,8 @@ public class Main extends Application {
         scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Login");
         stage.initStyle(StageStyle.TRANSPARENT);
+        stage.getIcons().add(new Image(new FileInputStream(new File(resources+File.separator+"icon.png"))));
+
         stage.setScene(scene);
         stage.show();
     }

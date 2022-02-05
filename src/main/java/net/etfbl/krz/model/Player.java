@@ -18,6 +18,12 @@ public class Player {
     public Player() {
     }
 
+    public  Player(String username, String time, int result){
+        this.username = username;
+        this.time=time;
+        this.result = result;
+    }
+
     public String getUsername() {
         return username;
     }

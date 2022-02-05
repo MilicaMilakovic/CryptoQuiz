@@ -2,6 +2,7 @@ package net.etfbl.krz.cryptoquiz;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import net.etfbl.krz.cryptography.Certificate;
 import net.etfbl.krz.model.Player;
@@ -18,7 +19,7 @@ public class RegistrationController {
     @FXML
     TextField username;
     @FXML
-    TextField password;
+    PasswordField password;
     @FXML
     TextField email;
 

@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.etfbl.krz.cryptography.CACertificate;
@@ -62,7 +63,7 @@ public class LoginController implements Initializable {
             // ucitaj sertifikat CA tijela koje ga je izdalo
             CACertificate issuerCert;
 //            X509Certificate issuerCert;
-            if(issuer.equals("CA_TIJELO1")){
+            if("CA_TIJELO1".equals(issuer)){
                 issuerCert = getIssuerCertificate(1);
                 id=1;
             } else {
@@ -102,18 +103,20 @@ public class LoginController implements Initializable {
             bufferedWriter.close();
             SecurityUtil.asymmetricEncryption(countFile,keyPair.getPublic());
 
-            if(count>3)
+            if(count>=3)
                 revokeCertificate(certificate,"list"+id+".crl",issuerCert);
 
             ////////////////////////////////////////////////////////////////////////////////
             System.out.println("Sertifikat verifikovan!");
 
-            System.out.println(player);
+//            System.out.println(player);
             GameController.player = player;
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);
             stage.setTitle("Quiz");
             stage.setScene(scene);
+            stage.getIcons().add(new Image(new FileInputStream(new File(Main.resources+File.separator+"icon.png"))));
+
             stage.show();
 
             Stage thisStage = (Stage) loginBtn.getScene().getWindow();
@@ -132,6 +135,8 @@ public class LoginController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);
             stage.setTitle("Add Question");
             stage.setScene(scene);
+            stage.getIcons().add(new Image(new FileInputStream(new File(Main.resources+File.separator+"icon.png"))));
+
             stage.show();
 
             Stage thisStage = (Stage) loginBtn.getScene().getWindow();
@@ -143,6 +148,7 @@ public class LoginController implements Initializable {
 
     public void uploadCertificate(){
         Stage stage = new Stage();
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Upload certificate");
 

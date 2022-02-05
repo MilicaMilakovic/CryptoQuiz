@@ -204,7 +204,7 @@ public class GameController implements Initializable {
     public void loadFinishScreen(){
         player.setResult(correctAnswers);
         player.setTime(time);
-        System.out.println(player);
+//        System.out.println(player);
         Parent root = null;
         EndGameController.score = correctAnswers;
         nextQuestionBtn.setVisible(false);
