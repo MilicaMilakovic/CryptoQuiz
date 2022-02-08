@@ -1,6 +1,6 @@
 # CryptoQuiz
 
-Cryptography | University Project 2020
+Cryptography | University Project 2022
 
 - Symmetric cryptography 
 - Asymmetric cryptography
